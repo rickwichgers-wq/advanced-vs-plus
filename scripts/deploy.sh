@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-SLUG="advanced-plus"
+SLUG="advanced-vs-plus"
 SRC="deploy"
 DIST="dist"
 

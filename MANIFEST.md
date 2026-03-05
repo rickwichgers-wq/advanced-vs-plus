@@ -104,7 +104,7 @@ The deploy script copies `deploy/` → `dist/`, excluding `client/`, then deploy
 
 # Or manually:
 rsync -a --exclude='client/' deploy/ dist/
-quick deploy dist/ advanced-plus
+quick deploy dist/ advanced-vs-plus
 ```
 
 **Local dev:**
@@ -113,4 +113,4 @@ npx serve deploy -l 3000
 # → http://localhost:3000 (uses client/quick.js stub)
 ```
 
-**Quick slug:** `advanced-plus.quick.shopify.io`
+**Quick slug:** `advanced-vs-plus.quick.shopify.io`
