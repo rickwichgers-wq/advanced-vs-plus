@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Changelog — PlusCase</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="/client/quick.js"></script>
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body class="bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100">
+  <div id="sidebar-overlay" class="hidden fixed inset-0 bg-black/30 z-30 lg:hidden"></div>
+
+  <div class="app-layout">
+    <aside id="sidebar" class="app-sidebar bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 -translate-x-full lg:translate-x-0"></aside>
+
+    <main class="app-main">
+      <div id="header"></div>
+
+      <div class="app-content">
+      </div>
+    </main>
+  </div>
+
+  <script type="module">
+    import { initApp, refreshIcons } from '/js/core/app.js';
+    import { renderInto } from '/js/utils/render.js';
+
+    async function init() {
+      await initApp('changelog');
+
+      renderInto('.app-content', `
+        <div class="max-w-3xl mx-auto fade-in">
+          <div class="space-y-6">
+            <div class="card">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400">v0.1.0</span>
+                <span class="text-xs text-gray-400">March 2026</span>
+              </div>
+              <h3 class="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2">Initial Release</h3>
+              <ul class="space-y-1.5 text-sm text-gray-600 dark:text-gray-400">
+                <li class="flex items-start gap-2">
+                  <i data-lucide="plus" class="w-3.5 h-3.5 mt-0.5 text-emerald-500 flex-shrink-0"></i>
+                  Fee Savings Calculator — compare transaction fees at different GMV levels
+                </li>
+                <li class="flex items-start gap-2">
+                  <i data-lucide="plus" class="w-3.5 h-3.5 mt-0.5 text-emerald-500 flex-shrink-0"></i>
+                  TCO Calculator — total cost of ownership comparison
+                </li>
+                <li class="flex items-start gap-2">
+                  <i data-lucide="plus" class="w-3.5 h-3.5 mt-0.5 text-emerald-500 flex-shrink-0"></i>
+                  POS Pro Savings — multi-location POS cost comparison
+                </li>
+                <li class="flex items-start gap-2">
+                  <i data-lucide="plus" class="w-3.5 h-3.5 mt-0.5 text-emerald-500 flex-shrink-0"></i>
+                  ROI / Payback Calculator
+                </li>
+                <li class="flex items-start gap-2">
+                  <i data-lucide="plus" class="w-3.5 h-3.5 mt-0.5 text-emerald-500 flex-shrink-0"></i>
+                  Feature comparisons across 6 categories
+                </li>
+                <li class="flex items-start gap-2">
+                  <i data-lucide="plus" class="w-3.5 h-3.5 mt-0.5 text-emerald-500 flex-shrink-0"></i>
+                  AI-powered generators: one-pagers, emails, talk tracks, exec summaries
+                </li>
+                <li class="flex items-start gap-2">
+                  <i data-lucide="plus" class="w-3.5 h-3.5 mt-0.5 text-emerald-500 flex-shrink-0"></i>
+                  Dark mode + responsive layout
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      `);
+
+      refreshIcons();
+    }
+
+    init();
+  </script>
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resources — PlusCase</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="/client/quick.js"></script>
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body class="bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100">
+  <div id="sidebar-overlay" class="hidden fixed inset-0 bg-black/30 z-30 lg:hidden"></div>
+
+  <div class="app-layout">
+    <aside id="sidebar" class="app-sidebar bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 -translate-x-full lg:translate-x-0"></aside>
+
+    <main class="app-main">
+      <div id="header"></div>
+
+      <div class="app-content">
+      </div>
+    </main>
+  </div>
+
+  <script type="module">
+    import { initApp, refreshIcons } from '/js/core/app.js';
+    import { renderInto } from '/js/utils/render.js';
+
+    async function init() {
+      await initApp('resources');
+      renderContent();
+      refreshIcons();
+    }
+
+    function renderContent() {
+      renderInto('.app-content', `
+        <div class="max-w-5xl mx-auto fade-in space-y-8">
+
+          <div class="px-3 py-2 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 text-sm text-amber-700 dark:text-amber-400">
+            <i data-lucide="info" class="w-4 h-4 inline-block mr-1 -mt-0.5"></i>
+            Temporary reference page — all existing resources found during research, collected in one place.
+          </div>
+
+          <!-- Quick Sites & Interactive Tools -->
+          <div class="card">
+            <h3 class="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+              <i data-lucide="globe" class="w-4 h-4 text-indigo-500"></i>
+              Quick Sites & Interactive Tools
+            </h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b-2 border-gray-200 dark:border-gray-700">
+                    <th class="text-left py-2 pr-4 text-xs font-semibold uppercase tracking-wider text-gray-500">Tool</th>
+                    <th class="text-left py-2 pr-4 text-xs font-semibold uppercase tracking-wider text-gray-500">Owner</th>
+                    <th class="text-left py-2 pr-4 text-xs font-semibold uppercase tracking-wider text-gray-500">Status</th>
+                    <th class="text-left py-2 text-xs font-semibold uppercase tracking-wider text-gray-500">Notes</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+                  <tr>
+                    <td class="py-2.5 pr-4"><a href="https://adv-plus-calculator.quick.shopify.io" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">Adv-Plus Calculator</a></td>
+                    <td class="py-2.5 pr-4 text-gray-600 dark:text-gray-400">Cassie Handrahan</td>
+                    <td class="py-2.5 pr-4"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">Active</span></td>
+                    <td class="py-2.5 text-gray-500 dark:text-gray-400">6-page interactive tool, SMB/lower mid-market. PDF export.</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 pr-4"><a href="https://roi-tco.shopify.prod.shopifyapps.com" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">ROI/TCO App</a></td>
+                    <td class="py-2.5 pr-4 text-gray-600 dark:text-gray-400">Pretesh Mistry</td>
+                    <td class="py-2.5 pr-4"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400">Needs owner</span></td>
+                    <td class="py-2.5 text-gray-500 dark:text-gray-400">Enterprise-focused. Owner departed.</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 pr-4"><a href="https://rate-limit-calculator.quick.shopify.io" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">Rate Limit Calculator</a></td>
+                    <td class="py-2.5 pr-4 text-gray-600 dark:text-gray-400">Unknown</td>
+                    <td class="py-2.5 pr-4"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">Active</span></td>
+                    <td class="py-2.5 text-gray-500 dark:text-gray-400">API rate limits by plan (40 vs 400 req/s)</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 pr-4"><a href="https://b2btco.code.digital" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">B2B TCO Calculator</a></td>
+                    <td class="py-2.5 pr-4 text-gray-600 dark:text-gray-400">Code / Domaine</td>
+                    <td class="py-2.5 pr-4"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">Partner</span></td>
+                    <td class="py-2.5 text-gray-500 dark:text-gray-400">European B2B campaign. Lead-capture wizard.</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 pr-4"><a href="https://csm-pulse.quick.shopify.io" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">CSM Pulse</a></td>
+                    <td class="py-2.5 pr-4 text-gray-600 dark:text-gray-400">Nathan Davis</td>
+                    <td class="py-2.5 pr-4"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">Active</span></td>
+                    <td class="py-2.5 text-gray-500 dark:text-gray-400">AI briefing tool (10 chained agents). Merchant performance analysis.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Spreadsheet Calculators -->
+          <div class="card">
+            <h3 class="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+              <i data-lucide="table" class="w-4 h-4 text-emerald-500"></i>
+              Spreadsheet Calculators
+            </h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b-2 border-gray-200 dark:border-gray-700">
+                    <th class="text-left py-2 pr-4 text-xs font-semibold uppercase tracking-wider text-gray-500">Calculator</th>
+                    <th class="text-left py-2 pr-4 text-xs font-semibold uppercase tracking-wider text-gray-500">Owner</th>
+                    <th class="text-left py-2 text-xs font-semibold uppercase tracking-wider text-gray-500">Focus</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+                  <tr>
+                    <td class="py-2.5 pr-4"><a href="https://docs.google.com/spreadsheets/d/1FbHBWKD2uWwaSGvbtD6LZmMovFiHnh0mm9P08PbrEfA/edit" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">TCO Calculator (General)</a></td>
+                    <td class="py-2.5 pr-4 text-gray-600 dark:text-gray-400">—</td>
+                    <td class="py-2.5 text-gray-500 dark:text-gray-400">Platform migration (Magento/SFCC vs Shopify). <a href="https://share.descript.com/view/YwoOkge13lT" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline">How-to video</a></td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 pr-4"><a href="https://docs.google.com/spreadsheets/d/1JTJQHVEkqOAXuFGR69O4f5UA53-4L-g4nmVYvRPBcnc/" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">Enterprise ROI Calculator</a></td>
+                    <td class="py-2.5 pr-4 text-gray-600 dark:text-gray-400">Nick Essling</td>
+                    <td class="py-2.5 text-gray-500 dark:text-gray-400">Enterprise ROI</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 pr-4"><a href="https://docs.google.com/spreadsheets/d/1hY8v8vqcR8XaeXaAmyF4HXVkGaV_DpYHUwGvgUb1FlU/" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">Audiences ROI Calculator</a></td>
+                    <td class="py-2.5 pr-4 text-gray-600 dark:text-gray-400">Lauren Ernst</td>
+                    <td class="py-2.5 text-gray-500 dark:text-gray-400">Audiences-specific ROI</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 pr-4"><a href="https://docs.google.com/spreadsheets/d/1OAkt9u24ZW4xAqjmHVAALRSdlAX0-RlKd_aP6UrYm-s/" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">DTC TCO Calculator</a></td>
+                    <td class="py-2.5 pr-4 text-gray-600 dark:text-gray-400">Lauren Ernst</td>
+                    <td class="py-2.5 text-gray-500 dark:text-gray-400">DTC total cost of ownership</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Enablement Decks & Documents -->
+          <div class="card">
+            <h3 class="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+              <i data-lucide="presentation" class="w-4 h-4 text-amber-500"></i>
+              Enablement Decks & Documents
+            </h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b-2 border-gray-200 dark:border-gray-700">
+                    <th class="text-left py-2 pr-4 text-xs font-semibold uppercase tracking-wider text-gray-500">Resource</th>
+                    <th class="text-left py-2 pr-4 text-xs font-semibold uppercase tracking-wider text-gray-500">Author</th>
+                    <th class="text-left py-2 text-xs font-semibold uppercase tracking-wider text-gray-500">Type</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+                  <tr>
+                    <td class="py-2.5 pr-4"><a href="https://docs.google.com/presentation/d/1H-5moGx4UkEYtg0c2He3KXqTCRd7f_EMcX8p4Kl5wNE/" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">Plus ROI Customer Deck</a></td>
+                    <td class="py-2.5 pr-4 text-gray-600 dark:text-gray-400">Lauren Ernst</td>
+                    <td class="py-2.5 text-gray-500 dark:text-gray-400">Google Slides</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 pr-4"><a href="https://docs.google.com/presentation/d/1bSyi5aTi4j0vaOa-w3TwcUzRaQ4wCSCRPy-mBH5jEoA/" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">Audiences & Checkout Enablement Deck</a></td>
+                    <td class="py-2.5 pr-4 text-gray-600 dark:text-gray-400">Lauren Ernst & Jiva</td>
+                    <td class="py-2.5 text-gray-500 dark:text-gray-400">Google Slides</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 pr-4"><a href="https://docs.google.com/presentation/d/1C2Doa7CbK4MQP_fl_vQijG6h6_Uh8xNy9AyHz0ulZyc/" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">Plus Plan Differentiation Deck</a></td>
+                    <td class="py-2.5 pr-4 text-gray-600 dark:text-gray-400">William Leiter</td>
+                    <td class="py-2.5 text-gray-500 dark:text-gray-400">Google Slides (Tobi-approved)</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 pr-4"><a href="https://docs.google.com/spreadsheets/d/1k5EMjglQZjV65e9y5g3JTS4e30Ez7CvO4hZsmC-MCTU/" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">Plus Feature Grid</a></td>
+                    <td class="py-2.5 pr-4 text-gray-600 dark:text-gray-400">Katie Bent</td>
+                    <td class="py-2.5 text-gray-500 dark:text-gray-400">Google Sheet</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 pr-4"><a href="https://docs.google.com/document/d/1yEo7i0SENfovy2CA5RzwBcqg_4Wm50ONK9kQM68BrtY/" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">Project Doc</a></td>
+                    <td class="py-2.5 pr-4 text-gray-600 dark:text-gray-400">#project-adv-vs-plus</td>
+                    <td class="py-2.5 text-gray-500 dark:text-gray-400">Google Doc</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 pr-4"><a href="https://docs.google.com/spreadsheets/d/1_bOBbMVjLZhjt4ZkmA6eCnKn8cYwnCG2ZxzXcEouvMY/" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">Survey Results</a></td>
+                    <td class="py-2.5 pr-4 text-gray-600 dark:text-gray-400">Rick Wichgers</td>
+                    <td class="py-2.5 text-gray-500 dark:text-gray-400">Google Sheet</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Guru / Vault -->
+          <div class="card">
+            <h3 class="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+              <i data-lucide="book-open" class="w-4 h-4 text-purple-500"></i>
+              Guru & Vault
+            </h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b-2 border-gray-200 dark:border-gray-700">
+                    <th class="text-left py-2 pr-4 text-xs font-semibold uppercase tracking-wider text-gray-500">Resource</th>
+                    <th class="text-left py-2 pr-4 text-xs font-semibold uppercase tracking-wider text-gray-500">Source</th>
+                    <th class="text-left py-2 text-xs font-semibold uppercase tracking-wider text-gray-500">Notes</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+                  <tr>
+                    <td class="py-2.5 pr-4"><a href="https://app.getguru.com/card/qi96aLpi/" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">Plus Exclusive Features</a></td>
+                    <td class="py-2.5 pr-4 text-gray-600 dark:text-gray-400">Guru Card</td>
+                    <td class="py-2.5 text-gray-500 dark:text-gray-400">Feature list</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 pr-4"><a href="https://app.getguru.com/folders/i59nxorT/Plus-Trial" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">Plus Trial Board</a></td>
+                    <td class="py-2.5 pr-4 text-gray-600 dark:text-gray-400">Guru Board</td>
+                    <td class="py-2.5 text-gray-500 dark:text-gray-400">Plus Trial program materials</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 pr-4"><a href="https://docs.google.com/document/d/1DKTcJX16Xq07O-T8V32bPQxT2pqRPmbr25Jh_8RBTh8/edit" target="_blank" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">Plus vs Advanced Plan Differentiation</a></td>
+                    <td class="py-2.5 pr-4 text-gray-600 dark:text-gray-400">Vault <code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 rounded">19Yo</code></td>
+                    <td class="py-2.5 text-gray-500 dark:text-gray-400">Feature differentiation details. "Advanced workarounds are not meant to be shared externally."</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 pr-4 font-medium text-gray-700 dark:text-gray-300">Value Selling & 5Cs Discovery</td>
+                    <td class="py-2.5 pr-4 text-gray-600 dark:text-gray-400">Vault <code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 rounded">s5Ih</code></td>
+                    <td class="py-2.5 text-gray-500 dark:text-gray-400">Full framework, pre-assessment, training videos. Owner: Rachel Farewell.</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 pr-4 font-medium text-gray-700 dark:text-gray-300">Land and Expand Playbook</td>
+                    <td class="py-2.5 pr-4 text-gray-600 dark:text-gray-400">Vault</td>
+                    <td class="py-2.5 text-gray-500 dark:text-gray-400">"Upgrade to Plus when scale or Audiences makes ROI obvious."</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 pr-4 font-medium text-gray-700 dark:text-gray-300">AI Commercial Revenue Education</td>
+                    <td class="py-2.5 pr-4 text-gray-600 dark:text-gray-400">Vault <code class="text-xs bg-gray-100 dark:bg-gray-800 px-1 rounded">5nll</code></td>
+                    <td class="py-2.5 text-gray-500 dark:text-gray-400">TCO comparison methodology and ROI calculation guidance.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Slack Channels -->
+          <div class="card">
+            <h3 class="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+              <i data-lucide="hash" class="w-4 h-4 text-pink-500"></i>
+              Slack Channels
+            </h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b-2 border-gray-200 dark:border-gray-700">
+                    <th class="text-left py-2 pr-4 text-xs font-semibold uppercase tracking-wider text-gray-500">Channel</th>
+                    <th class="text-left py-2 pr-4 text-xs font-semibold uppercase tracking-wider text-gray-500">Status</th>
+                    <th class="text-left py-2 text-xs font-semibold uppercase tracking-wider text-gray-500">Relevance</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
+                  <tr>
+                    <td class="py-2.5 pr-4 font-medium text-gray-700 dark:text-gray-300">#project-adv-vs-plus</td>
+                    <td class="py-2.5 pr-4"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">Active</span></td>
+                    <td class="py-2.5 text-gray-500 dark:text-gray-400">Primary project channel. Survey data, calculator links.</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 pr-4 font-medium text-gray-700 dark:text-gray-300">#kickingcass</td>
+                    <td class="py-2.5 pr-4"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">Active</span></td>
+                    <td class="py-2.5 text-gray-500 dark:text-gray-400">Cassie's SMB team. Calculator shared here.</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 pr-4 font-medium text-gray-700 dark:text-gray-300">#proj-plus-plan-differentiation</td>
+                    <td class="py-2.5 pr-4"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-400">Archived</span></td>
+                    <td class="py-2.5 text-gray-500 dark:text-gray-400">Product decisions on Plus vs Advanced features. Archived Sept 2025.</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 pr-4 font-medium text-gray-700 dark:text-gray-300">#proj-plus-trial-row-rollout</td>
+                    <td class="py-2.5 pr-4"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">Active</span></td>
+                    <td class="py-2.5 text-gray-500 dark:text-gray-400">Plus Trial rollout coordination.</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 pr-4 font-medium text-gray-700 dark:text-gray-300">#plus-trial-questions</td>
+                    <td class="py-2.5 pr-4"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">Active</span></td>
+                    <td class="py-2.5 text-gray-500 dark:text-gray-400">Ongoing Plus Trial Q&A.</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 pr-4 font-medium text-gray-700 dark:text-gray-300">#help-rev-tco-roi</td>
+                    <td class="py-2.5 pr-4"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">Active</span></td>
+                    <td class="py-2.5 text-gray-500 dark:text-gray-400">Feedback channel for ROI/TCO app.</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 pr-4 font-medium text-gray-700 dark:text-gray-300">#revenue-ai-use-cases</td>
+                    <td class="py-2.5 pr-4"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">Active</span></td>
+                    <td class="py-2.5 text-gray-500 dark:text-gray-400">AI tools for revenue teams.</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 pr-4 font-medium text-gray-700 dark:text-gray-300">#hd39-activate-30-club</td>
+                    <td class="py-2.5 pr-4"><span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">Reference</span></td>
+                    <td class="py-2.5 text-gray-500 dark:text-gray-400">Partner enablement — "when to pitch advanced vs plus."</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      `);
+    }
+
+    init();
+  </script>
+</body>
+</html>

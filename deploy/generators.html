@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generators — PlusCase</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="/client/quick.js"></script>
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body class="bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100">
+  <div id="sidebar-overlay" class="hidden fixed inset-0 bg-black/30 z-30 lg:hidden"></div>
+
+  <div class="app-layout">
+    <aside id="sidebar" class="app-sidebar bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 -translate-x-full lg:translate-x-0"></aside>
+
+    <main class="app-main">
+      <div id="header"></div>
+
+      <div class="app-content">
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="/js/pages/generators.js"></script>
+</body>
+</html>
