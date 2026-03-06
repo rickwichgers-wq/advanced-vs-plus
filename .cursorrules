@@ -1,0 +1,33 @@
+# PlusCase (Advanced vs Plus) — Cursor Rules
+
+## Memory Bank
+
+Read the memory bank at `memory-bank/` at the start of every task:
+- `projectbrief.md` — Scope, goals, identity
+- `productContext.md` — Why, problems solved, UX goals
+- `activeContext.md` — Current focus, next steps
+- `systemPatterns.md` — Architecture, patterns
+- `techContext.md` — Stack, setup, deploy
+- `progress.md` — What works, backlog, known issues
+
+## Project Conventions
+
+- **No build step** — Vanilla ES modules, Tailwind + Lucide via CDN
+- **deploy/** is the working source — all edits go in `deploy/`
+- **client/** in deploy is local-only — excluded from production (stub for quick.js)
+- **Cache prefix:** `ap:` for all sessionStorage/localStorage
+- **Page pattern:** `initApp('pageId')` → render → `refreshIcons()`
+
+## Key Files
+
+- `MANIFEST.md` — Project source of truth
+- `FRAMEWORK-BRIEFING.md` — Full framework reference for AI/bootstrap
+- `research.md` — AE survey, gap analysis, design suggestions
+
+## Deploy
+
+```bash
+./scripts/deploy.sh
+```
+
+Live: `advanced-vs-plus.quick.shopify.io`

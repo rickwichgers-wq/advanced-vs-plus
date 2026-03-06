@@ -1,20 +1,20 @@
 import { $, renderInto } from '../utils/render.js';
-import { REGIONS } from '../utils/data.js';
+import { EMEA_COUNTRIES } from '../utils/data.js';
 
 export function renderCalculatorForm(containerId, { fields = [], onCalculate }) {
   const container = typeof containerId === 'string' ? $(containerId) : containerId;
   if (!container) return;
 
-  const regionOptions = Object.entries(REGIONS)
-    .map(([key, r]) => `<option value="${key}">${r.label} (${r.currency})</option>`)
+  const countryOptions = Object.entries(EMEA_COUNTRIES)
+    .map(([key, c]) => `<option value="${key}">${c.label} (${c.symbol}${c.advanced})</option>`)
     .join('');
 
   const fieldsHTML = fields.map(field => {
-    if (field.type === 'region') {
+    if (field.type === 'emea_country') {
       return `
         <div>
           <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">${field.label}</label>
-          <select id="${field.id}" class="form-input">${regionOptions}</select>
+          <select id="${field.id}" class="form-input">${countryOptions}</select>
         </div>`;
     }
     if (field.type === 'select') {

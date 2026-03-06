@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopify Advanced vs Plus Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --page-width: 297mm;
+            --page-height: 210mm;
+            --page-padding: 20mm;
+            --bg-primary: #f0f1f3;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --bg-input: #f5f6f8;
+            --text-primary: #1a1a2e;
+            --text-secondary: #5a5a7a;
+            --text-muted: #8e8ea0;
+            --accent-green: #00c853;
+            --accent-green-dim: rgba(0, 200, 83, 0.10);
+            --accent-red: #ff3d57;
+            --accent-red-dim: rgba(255, 61, 87, 0.10);
+            --accent-blue: #2962ff;
+            --accent-orange: #ff9100;
+            --border-color: rgba(0, 0, 0, 0.07);
+            --border-highlight: rgba(0, 0, 0, 0.14);
+            --shadow-card: 0 1px 8px rgba(0, 0, 0, 0.06);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 14px;
+            --radius-xl: 20px;
+        }
+
+        @page {
+            size: A4 landscape;
+            margin: 0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.45;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .pages-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+            padding: 32px 0;
+        }
+
+        .page {
+            width: var(--page-width);
+            height: var(--page-height);
+            background: var(--bg-secondary);
+            padding: var(--page-padding);
+            box-shadow: 0 4px 32px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            page-break-after: always;
+            page-break-inside: avoid;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page:last-child {
+            page-break-after: auto;
+        }
+
+        .page-footer {
+            position: absolute;
+            bottom: 8mm;
+            left: var(--page-padding);
+            right: var(--page-padding);
+            display: flex;
+            justify-content: space-between;
+            font-size: 9px;
+            color: var(--text-muted);
+        }
+
+        /* ===== PAGE 1: COVER ===== */
+        .cover-page {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #f8faf5 0%, #ffffff 40%, #f0f7ff 100%);
+        }
+
+        .cover-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #95bf47 0%, #5e8e3e 100%);
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #fff;
+            margin-bottom: 24px;
+        }
+
+        .cover-title {
+            font-size: 52px;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .cover-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-bottom: 40px;
+        }
+
+        .company-input input {
+            background: var(--bg-input);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 14px 24px;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-align: center;
+            width: 360px;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .company-input input:focus {
+            outline: none;
+            border-color: #95bf47;
+            box-shadow: 0 0 0 4px rgba(149, 191, 71, 0.15);
+        }
+
+        .currency-selector {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 20px;
+            margin-bottom: 8px;
+        }
+
+        .currency-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 22px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid var(--border-color);
+            background: #ffffff;
+            color: var(--text-secondary);
+            font-family: inherit;
+        }
+
+        .currency-btn:hover {
+            border-color: var(--border-highlight);
+            background: var(--bg-input);
+        }
+
+        .currency-btn.active {
+            border-color: #95bf47;
+            background: linear-gradient(135deg, rgba(149, 191, 71, 0.08) 0%, #ffffff 100%);
+            color: var(--text-primary);
+            box-shadow: 0 0 0 3px rgba(149, 191, 71, 0.12);
+        }
+
+        .currency-btn .currency-symbol {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 24px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            border-radius: var(--radius-md);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2962ff 0%, #1a47b8 100%);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(41, 98, 255, 0.35);
+        }
+
+        .btn-secondary {
+            background: #ffffff;
+            color: var(--text-primary);
+            border: 1px solid var(--border-highlight);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-input);
+        }
+
+        /* ===== SHARED COMPONENTS ===== */
+        .page-title {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .page-title .icon {
+            font-size: 20px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+        }
+
+        .card-header {
+            padding: 12px 18px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-input);
+        }
+
+        .card-header h2 {
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-header .badge {
+            width: 26px;
+            height: 26px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+        }
+
+        .badge-green { background: var(--accent-green-dim); }
+        .badge-blue { background: rgba(41, 98, 255, 0.10); }
+        .badge-orange { background: rgba(255, 145, 0, 0.10); }
+
+        .card-body {
+            padding: 16px 18px;
+        }
+
+        .input-group {
+            margin-bottom: 10px;
+        }
+
+        .input-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-prefix, .input-suffix {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
+            color: var(--text-muted);
+            pointer-events: none;
+            font-weight: 500;
+        }
+
+        .input-prefix { left: 10px; }
+        .input-suffix { right: 10px; }
+
+        input[type="number"], input[type="text"] {
+            width: 100%;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 8px 10px;
+            font-size: 13px;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-primary);
+            transition: all 0.2s ease;
+        }
+
+        input.has-prefix { padding-left: 24px; }
+        input.has-suffix { padding-right: 28px; }
+
+        input[type="number"]:focus, input[type="text"]:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(41, 98, 255, 0.12);
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .input-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 12px 0;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 7px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .result-row:last-child { border-bottom: none; }
+
+        .result-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .result-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .result-value.positive { color: var(--accent-green); }
+        .result-value.negative { color: var(--accent-red); }
+
+        .total-row {
+            background: var(--bg-input);
+            margin: 0 -18px -16px;
+            padding: 12px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .total-label {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .total-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        /* ===== PAGE 2: INPUTS ===== */
+        .inputs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            flex: 1;
+        }
+
+        /* ===== PAGE 3: COMPARISON ===== */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            flex: 1;
+        }
+
+        .comparison-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            padding: 18px;
+            box-shadow: var(--shadow-card);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .comparison-card.current {
+            border-color: var(--border-highlight);
+        }
+
+        .comparison-card.plus {
+            border-color: var(--accent-green);
+            background: linear-gradient(135deg, rgba(0, 200, 83, 0.04) 0%, #ffffff 100%);
+        }
+
+        .comparison-title {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .comparison-card.plus .comparison-title {
+            color: var(--accent-green);
+        }
+
+        .comparison-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .savings-banner {
+            background: linear-gradient(135deg, rgba(0, 200, 83, 0.08) 0%, rgba(0, 200, 83, 0.02) 100%);
+            border: 1px solid rgba(0, 200, 83, 0.3);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        .savings-banner.cost {
+            background: linear-gradient(135deg, rgba(255, 61, 87, 0.08) 0%, rgba(255, 61, 87, 0.02) 100%);
+            border-color: rgba(255, 61, 87, 0.3);
+        }
+
+        .savings-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .savings-amount {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent-green);
+        }
+
+        .savings-banner.cost .savings-amount {
+            color: var(--accent-red);
+        }
+
+        .savings-period {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* ===== PAGE 4: FUNNEL ===== */
+        .funnel-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            flex: 1;
+        }
+
+        .dropoff-banner {
+            background: rgba(255, 61, 87, 0.05);
+            border: 1px solid rgba(255, 61, 87, 0.2);
+            border-radius: var(--radius-lg);
+            padding: 14px 20px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 12px;
+        }
+
+        .dropoff-stat { text-align: center; }
+
+        .dropoff-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--accent-red);
+        }
+
+        .dropoff-label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        /* ===== PAGE 5: UPLIFT ===== */
+        .uplift-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            flex: 1;
+        }
+
+        .uplift-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            padding: 14px;
+            box-shadow: var(--shadow-card);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .uplift-card.poor { border-top: 3px solid var(--accent-orange); }
+        .uplift-card.average { border-top: 3px solid var(--accent-blue); }
+        .uplift-card.great { border-top: 3px solid var(--accent-green); }
+
+        .uplift-scenario {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .uplift-card.poor .uplift-scenario { color: var(--accent-orange); }
+        .uplift-card.average .uplift-scenario { color: var(--accent-blue); }
+        .uplift-card.great .uplift-scenario { color: var(--accent-green); }
+
+        .uplift-inputs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .uplift-input-group label {
+            display: block;
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-bottom: 3px;
+            font-weight: 600;
+        }
+
+        .uplift-input-group input {
+            text-align: center;
+            font-size: 12px;
+            padding: 6px;
+        }
+
+        .uplift-result {
+            background: var(--bg-input);
+            border-radius: var(--radius-md);
+            padding: 10px 12px;
+            flex: 1;
+        }
+
+        .uplift-result-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+        }
+
+        .uplift-result-label {
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        .uplift-result-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .net-benefit {
+            margin-top: 6px;
+            padding-top: 6px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .net-benefit .uplift-result-label {
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .net-benefit .uplift-result-value {
+            font-size: 14px;
+            color: #00c853;
+        }
+
+        /* ===== PAGE 6: SUMMARY ===== */
+        .summary-page-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .summary-card {
+            background: linear-gradient(135deg, rgba(0, 200, 83, 0.06) 0%, #ffffff 100%);
+            border: 2px solid var(--accent-green);
+            border-radius: var(--radius-xl);
+            padding: 32px 48px;
+            text-align: center;
+            width: 100%;
+            max-width: 700px;
+        }
+
+        .summary-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .summary-subtitle {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .summary-item {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 16px;
+        }
+
+        .summary-label {
+            display: block;
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .summary-value {
+            display: block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .summary-value.positive { color: #00c853; }
+        .summary-value.negative { color: var(--accent-red); }
+
+        .summary-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin-bottom: 24px;
+        }
+
+        .summary-total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 20px;
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            margin-bottom: 10px;
+        }
+
+        .summary-total-row.annual {
+            background: linear-gradient(135deg, #00c853 0%, #009624 100%);
+            border: none;
+        }
+
+        .summary-total-row.annual .summary-total-label,
+        .summary-total-row.annual .summary-total-value {
+            color: #ffffff;
+        }
+
+        .summary-total-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .summary-total-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 22px;
+            font-weight: 700;
+            color: #00c853;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-muted);
+            font-size: 10px;
+            font-style: italic;
+        }
+
+        /* ===== PRINT STYLES ===== */
+        @media print {
+            body {
+                background: #fff !important;
+            }
+
+            .pages-wrapper {
+                gap: 0;
+                padding: 0;
+            }
+
+            .page {
+                box-shadow: none !important;
+                margin: 0;
+            }
+
+            .action-buttons, .currency-selector {
+                display: none !important;
+            }
+
+            .company-input input {
+                border-color: transparent;
+                background: transparent;
+            }
+
+            input[type="number"], input[type="text"] {
+                border-color: transparent;
+                background: transparent;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pages-wrapper">
+
+        <!-- ==================== PAGE 1: COVER ==================== -->
+        <div class="page cover-page">
+            <div>
+                <div class="cover-badge">
+                    <span>💎</span> Shopify Calculator
+                </div>
+                <h1 class="cover-title">Advanced vs Plus</h1>
+                <p class="cover-subtitle">Compare your current costs with Shopify Plus benefits</p>
+                <div class="company-input">
+                    <input type="text" id="companyName" value="" placeholder="Company Name">
+                </div>
+                <div class="currency-selector">
+                    <button class="currency-btn" data-currency="USD" onclick="setCurrency('USD')">
+                        <span class="currency-symbol">$</span> Dollar
+                    </button>
+                    <button class="currency-btn" data-currency="GBP" onclick="setCurrency('GBP')">
+                        <span class="currency-symbol">£</span> Sterling
+                    </button>
+                    <button class="currency-btn active" data-currency="EUR" onclick="setCurrency('EUR')">
+                        <span class="currency-symbol">€</span> Euro
+                    </button>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" onclick="resetCalculator()">
+                        <span>↺</span> Reset
+                    </button>
+                    <button class="btn btn-primary" onclick="downloadPDF()">
+                        <span>📄</span> Download PDF
+                    </button>
+                </div>
+            </div>
+            <div class="page-footer">
+                <span>Shopify Advanced vs Plus Calculator</span>
+                <span>Page 1 of 6</span>
+            </div>
+        </div>
+
+        <!-- ==================== PAGE 2: INPUTS ==================== -->
+        <div class="page">
+            <h2 class="page-title"><span class="icon">📊</span> Revenue & Configuration</h2>
+            <div class="inputs-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><span class="badge badge-green">💰</span> Revenue Data</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <label class="input-label">Total Online Sales (Last 365 Days)</label>
+                            <div class="input-wrapper">
+                                <span class="input-prefix">€</span>
+                                <input type="number" id="totalRevenue" class="has-prefix" value="0" placeholder="0">
+                            </div>
+                        </div>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label class="input-label">Shopify Payments Volume</label>
+                                <div class="input-wrapper">
+                                    <span class="input-prefix">€</span>
+                                    <input type="number" id="spVolume" class="has-prefix" value="0" placeholder="0">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">PayPal Volume</label>
+                                <div class="input-wrapper">
+                                    <span class="input-prefix">€</span>
+                                    <input type="number" id="paypalVolume" class="has-prefix" value="0" placeholder="0">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label class="input-label">3rd Party Transactions (SP Enabled)</label>
+                                <div class="input-wrapper">
+                                    <span class="input-prefix">€</span>
+                                    <input type="number" id="thirdPartySpEnabled" class="has-prefix" value="0" placeholder="0">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">3rd Party Transactions (SP Disabled)</label>
+                                <div class="input-wrapper">
+                                    <span class="input-prefix">€</span>
+                                    <input type="number" id="thirdPartySpDisabled" class="has-prefix" value="0" placeholder="0">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2><span class="badge badge-blue">⚙️</span> Plan & Rate Configuration</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label class="input-label">Current Plan Cost (Monthly)</label>
+                                <div class="input-wrapper">
+                                    <span class="input-prefix">€</span>
+                                    <input type="number" id="currentPlanCost" class="has-prefix" value="399" placeholder="399">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">Number of Stores</label>
+                                <input type="number" id="numStores" value="1" placeholder="1">
+                            </div>
+                        </div>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label class="input-label">Plus Plan Cost (Monthly, USD)</label>
+                                <div class="input-wrapper">
+                                    <span class="input-prefix" data-fixed>$</span>
+                                    <input type="number" id="plusPlanCost" class="has-prefix" value="2300" placeholder="2300">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">Exchange Rate (USD → Display)</label>
+                                <input type="number" id="exchangeRate" value="0.92" step="0.01" placeholder="0.92">
+                            </div>
+                        </div>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label class="input-label">POS Pro Locations (79€/location)</label>
+                                <input type="number" id="posProLocations" value="0" placeholder="0">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">POS Pro Cost per Location</label>
+                                <div class="input-wrapper">
+                                    <span class="input-prefix">€</span>
+                                    <input type="number" id="posProCostPerLocation" class="has-prefix" value="79" placeholder="79">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label class="input-label">Current CC Rate</label>
+                                <div class="input-wrapper">
+                                    <input type="number" id="currentCcRate" class="has-suffix" value="1.6" step="0.01" placeholder="1.6">
+                                    <span class="input-suffix">%</span>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">Current 3rd Party Rate</label>
+                                <div class="input-wrapper">
+                                    <input type="number" id="current3rdPartyRate" class="has-suffix" value="0.4" step="0.01" placeholder="0.4">
+                                    <span class="input-suffix">%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label class="input-label">Plus CC Rate</label>
+                                <div class="input-wrapper">
+                                    <input type="number" id="plusCcRate" class="has-suffix" value="1.3" step="0.01" placeholder="1.3">
+                                    <span class="input-suffix">%</span>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">Plus 3rd Party Rate</label>
+                                <div class="input-wrapper">
+                                    <input type="number" id="plus3rdPartyRate" class="has-suffix" value="0.2" step="0.01" placeholder="0.2">
+                                    <span class="input-suffix">%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-footer">
+                <span>Shopify Advanced vs Plus Calculator</span>
+                <span>Page 2 of 6</span>
+            </div>
+        </div>
+
+        <!-- ==================== PAGE 3: COST COMPARISON ==================== -->
+        <div class="page">
+            <h2 class="page-title"><span class="icon">💳</span> Cost Comparison</h2>
+            <div class="comparison-grid">
+                <div class="comparison-card current">
+                    <span class="comparison-title">Current State</span>
+                    <h3>Advanced Plan</h3>
+                    <div class="result-row">
+                        <span class="result-label">Plan Cost (x<span id="storeCountDisplay">1</span> stores)</span>
+                        <span class="result-value" id="currentPlanTotal">0,00 €</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">Payment Processing Fees</span>
+                        <span class="result-value" id="currentPaymentFees">0,00 €</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">3rd Party Transaction Fees (SP Disabled)</span>
+                        <span class="result-value" id="currentThirdPartyDisabled">0,00 €</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">3rd Party Transaction Fees (SP Enabled)</span>
+                        <span class="result-value" id="currentThirdPartyEnabled">0,00 €</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">POS Pro (<span id="posProLocationsDisplay">0</span> locations)</span>
+                        <span class="result-value" id="currentPosProCost">0,00 €</span>
+                    </div>
+                    <div style="flex:1"></div>
+                    <div class="total-row">
+                        <span class="total-label">Total Monthly Cost</span>
+                        <span class="total-value" id="currentTotalMonthly">0,00 €</span>
+                    </div>
+                </div>
+
+                <div class="comparison-card plus">
+                    <span class="comparison-title">Projected</span>
+                    <h3>Plus Plan</h3>
+                    <div class="result-row">
+                        <span class="result-label">Plus Plan Cost</span>
+                        <span class="result-value" id="plusPlanDisplay">0,00 €</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">Payment Processing Fees</span>
+                        <span class="result-value" id="plusPaymentFees">0,00 €</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">3rd Party Transaction Fees (SP Disabled)</span>
+                        <span class="result-value" id="plusThirdPartyDisabled">0,00 €</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">3rd Party Transaction Fees (SP Enabled)</span>
+                        <span class="result-value" id="plusThirdPartyEnabled">0,00 €</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">POS Pro (Up to 20 locations)</span>
+                        <span class="result-value positive" id="plusPosProCost">0,00 €</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">Expansion Stores (9 included)</span>
+                        <span class="result-value positive" id="plusExpansionStores">0,00 €</span>
+                    </div>
+                    <div style="flex:1"></div>
+                    <div class="total-row">
+                        <span class="total-label">Total Monthly Cost</span>
+                        <span class="total-value" id="plusTotalMonthly">0,00 €</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="savings-banner" id="savingsBanner">
+                <p class="savings-label" id="savingsLabel">Cost of Upgrading to Plus</p>
+                <p class="savings-amount" id="savingsAmount">0,00 €</p>
+                <p class="savings-period">per month (<span id="savingsAnnual">0,00 €</span>/year)</p>
+            </div>
+            <div class="page-footer">
+                <span>Shopify Advanced vs Plus Calculator</span>
+                <span>Page 3 of 6</span>
+            </div>
+        </div>
+
+        <!-- ==================== PAGE 4: CONVERSION FUNNEL ==================== -->
+        <div class="page">
+            <h2 class="page-title"><span class="icon">📈</span> Conversion Funnel Analysis</h2>
+            <div class="funnel-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h2><span class="badge badge-orange">📊</span> Session Data</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <label class="input-label">Total Sessions (Last 12 Months)</label>
+                            <input type="number" id="totalSessions" value="0" placeholder="0">
+                        </div>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label class="input-label">Reached Checkout</label>
+                                <input type="number" id="reachedCheckout" value="0" placeholder="0">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">Sessions Converted</label>
+                                <input type="number" id="sessionsConverted" value="0" placeholder="0">
+                            </div>
+                        </div>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label class="input-label">Average Order Value (AOV)</label>
+                                <div class="input-wrapper">
+                                    <span class="input-prefix">€</span>
+                                    <input type="number" id="aov" class="has-prefix" value="0" step="0.01" placeholder="0">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">Total Orders (Last 365 Days)</label>
+                                <input type="number" id="totalOrders" value="0" placeholder="0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2><span class="badge badge-green">🎯</span> Conversion Metrics</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="result-row">
+                            <span class="result-label">Checkout Rate</span>
+                            <span class="result-value" id="checkoutRate">0.00%</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Store Conversion Rate</span>
+                            <span class="result-value" id="conversionRate">0.00%</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Checkout Completion Rate</span>
+                            <span class="result-value" id="checkoutCompletionRate">0.00%</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Checkout Dropoff Rate</span>
+                            <span class="result-value negative" id="dropoffRate">-0.00%</span>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="result-row">
+                            <span class="result-label">Dropped Sessions</span>
+                            <span class="result-value negative" id="droppedSessions">0</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">Potential Lost Revenue</span>
+                            <span class="result-value negative" id="potentialLostRevenue">0,00 €</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dropoff-banner">
+                <div class="dropoff-stat">
+                    <div class="dropoff-value" id="dropoffRateBig">0.00%</div>
+                    <div class="dropoff-label">Checkout Dropoff Rate</div>
+                </div>
+                <div class="dropoff-stat">
+                    <div class="dropoff-value" id="droppedSessionsBig">0</div>
+                    <div class="dropoff-label">Sessions Lost at Checkout</div>
+                </div>
+                <div class="dropoff-stat">
+                    <div class="dropoff-value" id="lostRevenueBig">0,00 €</div>
+                    <div class="dropoff-label">Potential Lost Revenue</div>
+                </div>
+            </div>
+            <div class="page-footer">
+                <span>Shopify Advanced vs Plus Calculator</span>
+                <span>Page 4 of 6</span>
+            </div>
+        </div>
+
+        <!-- ==================== PAGE 5: CHECKOUT EXTENSIBILITY ==================== -->
+        <div class="page">
+            <h2 class="page-title"><span class="icon">✨</span> Checkout Extensibility Potential</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 12px; font-size: 12px;">Estimate potential revenue gains from improved conversion rates and AOV through Plus checkout customization.</p>
+
+            <div class="uplift-grid">
+                <div class="uplift-card poor">
+                    <span class="uplift-scenario">Poor Case</span>
+                    <div class="uplift-inputs">
+                        <div class="uplift-input-group">
+                            <label>Conversion Uplift</label>
+                            <div class="input-wrapper">
+                                <input type="number" id="poorConversionUplift" class="has-suffix" value="2" step="0.5">
+                                <span class="input-suffix">%</span>
+                            </div>
+                        </div>
+                        <div class="uplift-input-group">
+                            <label>AOV Uplift</label>
+                            <div class="input-wrapper">
+                                <input type="number" id="poorAovUplift" class="has-suffix" value="2" step="0.5">
+                                <span class="input-suffix">%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uplift-result">
+                        <div class="uplift-result-row">
+                            <span class="uplift-result-label">Projected Conversion</span>
+                            <span class="uplift-result-value" id="poorProjectedConversion">0.00%</span>
+                        </div>
+                        <div class="uplift-result-row">
+                            <span class="uplift-result-label">Additional Sales</span>
+                            <span class="uplift-result-value" id="poorAdditionalSales">0,00 €</span>
+                        </div>
+                        <div class="uplift-result-row">
+                            <span class="uplift-result-label">AOV Increase</span>
+                            <span class="uplift-result-value" id="poorAovIncrease">0,00 €</span>
+                        </div>
+                        <div class="uplift-result-row">
+                            <span class="uplift-result-label">Total Monthly Benefit</span>
+                            <span class="uplift-result-value" id="poorTotalBenefit">0,00 €</span>
+                        </div>
+                        <div class="uplift-result-row">
+                            <span class="uplift-result-label">Platform Cost Increase</span>
+                            <span class="uplift-result-value negative" id="poorCostIncrease">0,00 €</span>
+                        </div>
+                        <div class="uplift-result-row net-benefit">
+                            <span class="uplift-result-label">Net Benefit/Month</span>
+                            <span class="uplift-result-value" id="poorNetBenefit">0,00 €</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uplift-card average">
+                    <span class="uplift-scenario">Average Case</span>
+                    <div class="uplift-inputs">
+                        <div class="uplift-input-group">
+                            <label>Conversion Uplift</label>
+                            <div class="input-wrapper">
+                                <input type="number" id="avgConversionUplift" class="has-suffix" value="3" step="0.5">
+                                <span class="input-suffix">%</span>
+                            </div>
+                        </div>
+                        <div class="uplift-input-group">
+                            <label>AOV Uplift</label>
+                            <div class="input-wrapper">
+                                <input type="number" id="avgAovUplift" class="has-suffix" value="5" step="0.5">
+                                <span class="input-suffix">%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uplift-result">
+                        <div class="uplift-result-row">
+                            <span class="uplift-result-label">Projected Conversion</span>
+                            <span class="uplift-result-value" id="avgProjectedConversion">0.00%</span>
+                        </div>
+                        <div class="uplift-result-row">
+                            <span class="uplift-result-label">Additional Sales</span>
+                            <span class="uplift-result-value" id="avgAdditionalSales">0,00 €</span>
+                        </div>
+                        <div class="uplift-result-row">
+                            <span class="uplift-result-label">AOV Increase</span>
+                            <span class="uplift-result-value" id="avgAovIncrease">0,00 €</span>
+                        </div>
+                        <div class="uplift-result-row">
+                            <span class="uplift-result-label">Total Monthly Benefit</span>
+                            <span class="uplift-result-value" id="avgTotalBenefit">0,00 €</span>
+                        </div>
+                        <div class="uplift-result-row">
+                            <span class="uplift-result-label">Platform Cost Increase</span>
+                            <span class="uplift-result-value negative" id="avgCostIncrease">0,00 €</span>
+                        </div>
+                        <div class="uplift-result-row net-benefit">
+                            <span class="uplift-result-label">Net Benefit/Month</span>
+                            <span class="uplift-result-value" id="avgNetBenefit">0,00 €</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uplift-card great">
+                    <span class="uplift-scenario">Great Case</span>
+                    <div class="uplift-inputs">
+                        <div class="uplift-input-group">
+                            <label>Conversion Uplift</label>
+                            <div class="input-wrapper">
+                                <input type="number" id="greatConversionUplift" class="has-suffix" value="5" step="0.5">
+                                <span class="input-suffix">%</span>
+                            </div>
+                        </div>
+                        <div class="uplift-input-group">
+                            <label>AOV Uplift</label>
+                            <div class="input-wrapper">
+                                <input type="number" id="greatAovUplift" class="has-suffix" value="7" step="0.5">
+                                <span class="input-suffix">%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uplift-result">
+                        <div class="uplift-result-row">
+                            <span class="uplift-result-label">Projected Conversion</span>
+                            <span class="uplift-result-value" id="greatProjectedConversion">0.00%</span>
+                        </div>
+                        <div class="uplift-result-row">
+                            <span class="uplift-result-label">Additional Sales</span>
+                            <span class="uplift-result-value" id="greatAdditionalSales">0,00 €</span>
+                        </div>
+                        <div class="uplift-result-row">
+                            <span class="uplift-result-label">AOV Increase</span>
+                            <span class="uplift-result-value" id="greatAovIncrease">0,00 €</span>
+                        </div>
+                        <div class="uplift-result-row">
+                            <span class="uplift-result-label">Total Monthly Benefit</span>
+                            <span class="uplift-result-value" id="greatTotalBenefit">0,00 €</span>
+                        </div>
+                        <div class="uplift-result-row">
+                            <span class="uplift-result-label">Platform Cost Increase</span>
+                            <span class="uplift-result-value negative" id="greatCostIncrease">0,00 €</span>
+                        </div>
+                        <div class="uplift-result-row net-benefit">
+                            <span class="uplift-result-label">Net Benefit/Month</span>
+                            <span class="uplift-result-value" id="greatNetBenefit">0,00 €</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-footer">
+                <span>Shopify Advanced vs Plus Calculator</span>
+                <span>Page 5 of 6</span>
+            </div>
+        </div>
+
+        <!-- ==================== PAGE 6: SUMMARY ==================== -->
+        <div class="page">
+            <div class="summary-page-content">
+                <div class="summary-card">
+                    <h2 class="summary-title">Overall Potential with Shopify Plus</h2>
+                    <p class="summary-subtitle">Conservative estimate based on Poor Case scenario</p>
+
+                    <div class="summary-grid">
+                        <div class="summary-item">
+                            <span class="summary-label">Platform Cost Difference</span>
+                            <span class="summary-value" id="summaryPlatformCost">0,00 €</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Potential Revenue Uplift (Poor Case)</span>
+                            <span class="summary-value positive" id="summaryRevenueUplift">0,00 €</span>
+                        </div>
+                    </div>
+
+                    <div class="summary-divider"></div>
+
+                    <div style="max-width: 440px; margin: 0 auto;">
+                        <div class="summary-total-row">
+                            <span class="summary-total-label">Net Monthly Benefit</span>
+                            <span class="summary-total-value" id="summaryNetMonthly">0,00 €</span>
+                        </div>
+                        <div class="summary-total-row annual">
+                            <span class="summary-total-label">Net Annual Benefit</span>
+                            <span class="summary-total-value" id="summaryNetAnnual">0,00 €</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="footer-note">
+                    * All potential sales figures are approximations. Actual results may vary based on implementation and market conditions.
+                </p>
+            </div>
+            <div class="page-footer">
+                <span>Shopify Advanced vs Plus Calculator</span>
+                <span>Page 6 of 6</span>
+            </div>
+        </div>
+
+    </div>
+
+    <script nonce="e5a4b852687ae43e51ed7879e39ad9af">
+        const currencyConfig = {
+            USD: { symbol: '$', code: 'USD', locale: 'en-US', label: 'Dollar', largePrefix: '$', exchangeFromUSD: 1 },
+            GBP: { symbol: '£', code: 'GBP', locale: 'en-GB', label: 'Sterling', largePrefix: '£', exchangeFromUSD: 0.79 },
+            EUR: { symbol: '€', code: 'EUR', locale: 'de-DE', label: 'Euro', largePrefix: '€', exchangeFromUSD: 0.92 }
+        };
+
+        let activeCurrency = 'EUR';
+
+        function setCurrency(code) {
+            activeCurrency = code;
+
+            document.querySelectorAll('.currency-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.currency === code);
+            });
+
+            const sym = currencyConfig[code].symbol;
+            document.querySelectorAll('.input-prefix').forEach(el => {
+                if (el.hasAttribute('data-fixed')) return;
+                if (['$', '€', '£'].includes(el.textContent.trim())) {
+                    el.textContent = sym;
+                }
+            });
+
+            document.getElementById('exchangeRate').value = currencyConfig[code].exchangeFromUSD;
+            calculate();
+        }
+
+        const defaultValues = {
+            companyName: '',
+            totalRevenue: 0,
+            spVolume: 0,
+            paypalVolume: 0,
+            thirdPartySpEnabled: 0,
+            thirdPartySpDisabled: 0,
+            currentPlanCost: 399,
+            numStores: 1,
+            plusPlanCost: 2300,
+            exchangeRate: 0.92,
+            posProLocations: 0,
+            posProCostPerLocation: 79,
+            currentCcRate: 1.6,
+            current3rdPartyRate: 0.4,
+            plusCcRate: 1.3,
+            plus3rdPartyRate: 0.2,
+            totalSessions: 0,
+            reachedCheckout: 0,
+            sessionsConverted: 0,
+            aov: 0,
+            totalOrders: 0,
+            poorConversionUplift: 2,
+            poorAovUplift: 2,
+            avgConversionUplift: 3,
+            avgAovUplift: 5,
+            greatConversionUplift: 5,
+            greatAovUplift: 7
+        };
+
+        function resetCalculator() {
+            if (confirm('Reset all values to defaults?')) {
+                activeCurrency = 'EUR';
+                document.querySelectorAll('.currency-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.currency === 'EUR');
+                });
+                Object.keys(defaultValues).forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.value = defaultValues[id];
+                });
+                setCurrency('EUR');
+            }
+        }
+
+        function downloadPDF() {
+            const companyName = document.getElementById('companyName').value || 'Shopify Calculator';
+            const originalTitle = document.title;
+            document.title = `${companyName} - Advanced vs Plus Analysis`;
+            document.body.classList.add('printing');
+            window.print();
+            setTimeout(() => {
+                document.title = originalTitle;
+                document.body.classList.remove('printing');
+            }, 1000);
+        }
+
+        const formatCurrency = (value) => {
+            const cfg = currencyConfig[activeCurrency];
+            return new Intl.NumberFormat(cfg.locale, {
+                style: 'currency',
+                currency: cfg.code,
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(value);
+        };
+
+        const formatLargeCurrency = (value) => {
+            const sym = currencyConfig[activeCurrency].largePrefix;
+            if (value >= 1000000) return (value / 1000000).toFixed(2) + ' Mio. ' + sym;
+            if (value >= 1000) return (value / 1000).toFixed(0) + 'K ' + sym;
+            return formatCurrency(value);
+        };
+
+        const formatPercent = (value, decimals = 2) => value.toFixed(decimals) + '%';
+        const formatNumber = (value) => new Intl.NumberFormat('en-US').format(Math.round(value));
+        const getVal = (id) => parseFloat(document.getElementById(id).value) || 0;
+
+        const setText = (id, text) => {
+            const el = document.getElementById(id);
+            if (el) el.textContent = text;
+        };
+
+        function calculate() {
+            const totalRevenue = getVal('totalRevenue');
+            const spVolume = getVal('spVolume');
+            const paypalVolume = getVal('paypalVolume');
+            const thirdPartySpEnabled = getVal('thirdPartySpEnabled');
+            const thirdPartySpDisabled = getVal('thirdPartySpDisabled');
+
+            const currentPlanCost = getVal('currentPlanCost');
+            const numStores = getVal('numStores');
+            const plusPlanCost = getVal('plusPlanCost');
+            const exchangeRate = getVal('exchangeRate') || 1;
+
+            const currentCcRate = getVal('currentCcRate') / 100;
+            const current3rdPartyRate = getVal('current3rdPartyRate') / 100;
+            const plusCcRate = getVal('plusCcRate') / 100;
+            const plus3rdPartyRate = getVal('plus3rdPartyRate') / 100;
+
+            const totalSessions = getVal('totalSessions');
+            const reachedCheckout = getVal('reachedCheckout');
+            const sessionsConverted = getVal('sessionsConverted');
+            const aov = getVal('aov');
+            const totalOrders = getVal('totalOrders');
+
+            const poorConversionUplift = getVal('poorConversionUplift') / 100;
+            const poorAovUplift = getVal('poorAovUplift') / 100;
+            const avgConversionUplift = getVal('avgConversionUplift') / 100;
+            const avgAovUplift = getVal('avgAovUplift') / 100;
+            const greatConversionUplift = getVal('greatConversionUplift') / 100;
+            const greatAovUplift = getVal('greatAovUplift') / 100;
+
+            const posProLocations = getVal('posProLocations');
+            const posProCostPerLocation = getVal('posProCostPerLocation');
+            const currentPosProCost = posProLocations * posProCostPerLocation;
+
+            const currentPlanTotal = currentPlanCost * numStores * exchangeRate;
+            const currentPaymentFees = (spVolume * currentCcRate) / 12;
+            const currentThirdPartyDisabledFees = (thirdPartySpDisabled * current3rdPartyRate) / 12;
+            const currentThirdPartyEnabledFees = (thirdPartySpEnabled * current3rdPartyRate) / 12;
+            const currentTotalMonthly = currentPlanTotal + currentPaymentFees + currentThirdPartyDisabledFees + currentThirdPartyEnabledFees + currentPosProCost;
+
+            const plusPlanDisplay = plusPlanCost * exchangeRate;
+            const plusPaymentFees = (spVolume * plusCcRate) / 12;
+            const plusThirdPartyDisabledFees = (thirdPartySpDisabled * plus3rdPartyRate) / 12;
+            const plusThirdPartyEnabledFees = (thirdPartySpEnabled * plus3rdPartyRate) / 12;
+            const plusTotalMonthly = plusPlanDisplay + plusPaymentFees + plusThirdPartyDisabledFees + plusThirdPartyEnabledFees;
+
+            const costDifference = plusTotalMonthly - currentTotalMonthly;
+
+            setText('storeCountDisplay', numStores);
+            setText('currentPlanTotal', formatCurrency(currentPlanTotal));
+            setText('currentPaymentFees', formatCurrency(currentPaymentFees));
+            setText('currentThirdPartyDisabled', formatCurrency(currentThirdPartyDisabledFees));
+            setText('currentThirdPartyEnabled', formatCurrency(currentThirdPartyEnabledFees));
+            setText('posProLocationsDisplay', posProLocations);
+            setText('currentPosProCost', formatCurrency(currentPosProCost));
+            setText('currentTotalMonthly', formatCurrency(currentTotalMonthly));
+
+            setText('plusPlanDisplay', formatCurrency(plusPlanDisplay));
+            setText('plusPaymentFees', formatCurrency(plusPaymentFees));
+            setText('plusThirdPartyDisabled', formatCurrency(plusThirdPartyDisabledFees));
+            setText('plusThirdPartyEnabled', formatCurrency(plusThirdPartyEnabledFees));
+            setText('plusPosProCost', formatCurrency(0));
+            setText('plusExpansionStores', formatCurrency(0));
+            setText('plusTotalMonthly', formatCurrency(plusTotalMonthly));
+
+            const savingsBanner = document.getElementById('savingsBanner');
+            const savingsLabel = document.getElementById('savingsLabel');
+            const savingsAmount = document.getElementById('savingsAmount');
+
+            if (costDifference > 0) {
+                savingsBanner.classList.add('cost');
+                savingsBanner.classList.remove('savings');
+                savingsLabel.textContent = 'Additional Cost with Plus';
+                savingsAmount.textContent = formatCurrency(costDifference);
+            } else {
+                savingsBanner.classList.remove('cost');
+                savingsBanner.classList.add('savings');
+                savingsLabel.textContent = 'Savings with Plus';
+                savingsAmount.textContent = formatCurrency(Math.abs(costDifference));
+            }
+            setText('savingsAnnual', formatCurrency(Math.abs(costDifference) * 12));
+
+            const checkoutRate = totalSessions > 0 ? (reachedCheckout / totalSessions) * 100 : 0;
+            const conversionRate = totalSessions > 0 ? (sessionsConverted / totalSessions) * 100 : 0;
+            const checkoutCompletionRate = reachedCheckout > 0 ? (sessionsConverted / reachedCheckout) * 100 : 0;
+            const dropoffRate = reachedCheckout > 0 ? (100 - checkoutCompletionRate) : 0;
+            const droppedSessions = Math.max(0, reachedCheckout - sessionsConverted);
+
+            const ordersPerSession = sessionsConverted > 0 ? (totalOrders / sessionsConverted) : 1;
+            const potentialLostRevenue = sessionsConverted > 0
+                ? droppedSessions * aov * (checkoutCompletionRate / 100) * ordersPerSession
+                : droppedSessions * aov;
+
+            setText('checkoutRate', formatPercent(checkoutRate));
+            setText('conversionRate', formatPercent(conversionRate));
+            setText('checkoutCompletionRate', formatPercent(checkoutCompletionRate));
+            setText('dropoffRate', '-' + formatPercent(dropoffRate));
+            setText('droppedSessions', formatNumber(droppedSessions));
+            setText('potentialLostRevenue', formatCurrency(potentialLostRevenue));
+
+            setText('dropoffRateBig', formatPercent(dropoffRate));
+            setText('droppedSessionsBig', formatNumber(droppedSessions));
+            setText('lostRevenueBig', formatLargeCurrency(potentialLostRevenue));
+
+            const monthlyOrderRevenue = (totalOrders * aov) / 12;
+            const baseConversionRate = conversionRate / 100;
+
+            const scenarios = [
+                { prefix: 'poor', convUplift: poorConversionUplift, aovUplift: poorAovUplift },
+                { prefix: 'avg', convUplift: avgConversionUplift, aovUplift: avgAovUplift },
+                { prefix: 'great', convUplift: greatConversionUplift, aovUplift: greatAovUplift }
+            ];
+
+            let poorCaseNetBenefit = 0;
+            let poorCaseTotalBenefit = 0;
+
+            scenarios.forEach(scenario => {
+                const projectedConversion = baseConversionRate * (1 + scenario.convUplift);
+                const additionalConversions = (projectedConversion - baseConversionRate) * totalSessions;
+                const additionalSales = (additionalConversions * aov) / 12;
+                const aovIncrease = monthlyOrderRevenue * scenario.aovUplift;
+                const totalBenefit = additionalSales + aovIncrease;
+                const netBenefit = totalBenefit - costDifference;
+
+                if (scenario.prefix === 'poor') {
+                    poorCaseNetBenefit = netBenefit;
+                    poorCaseTotalBenefit = totalBenefit;
+                }
+
+                setText(`${scenario.prefix}ProjectedConversion`, formatPercent(projectedConversion * 100));
+                setText(`${scenario.prefix}AdditionalSales`, formatCurrency(additionalSales));
+                setText(`${scenario.prefix}AovIncrease`, formatCurrency(aovIncrease));
+                setText(`${scenario.prefix}TotalBenefit`, formatCurrency(totalBenefit));
+                setText(`${scenario.prefix}CostIncrease`, formatCurrency(-costDifference));
+                setText(`${scenario.prefix}NetBenefit`, formatCurrency(netBenefit));
+            });
+
+            const summaryPlatformCost = document.getElementById('summaryPlatformCost');
+            const summaryNetMonthly = document.getElementById('summaryNetMonthly');
+
+            setText('summaryPlatformCost', formatCurrency(-costDifference));
+            if (costDifference > 0) {
+                summaryPlatformCost.classList.add('negative');
+                summaryPlatformCost.classList.remove('positive');
+            } else {
+                summaryPlatformCost.classList.add('positive');
+                summaryPlatformCost.classList.remove('negative');
+            }
+
+            setText('summaryRevenueUplift', formatCurrency(poorCaseTotalBenefit));
+            setText('summaryNetMonthly', formatCurrency(poorCaseNetBenefit));
+            setText('summaryNetAnnual', formatCurrency(poorCaseNetBenefit * 12));
+
+            summaryNetMonthly.style.color = poorCaseNetBenefit >= 0 ? '#00c853' : '#ff3d57';
+        }
+
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', calculate);
+            input.addEventListener('change', calculate);
+        });
+
+        calculate();
+    </script>
+</body>
+</html>
