@@ -34,12 +34,26 @@ function renderContent() {
 /* ── Section 1: Summary ────────────────────────────────────── */
 
 function renderSummary() {
-  const differentiators = getKeyDifferentiators();
   const benefits = getKeyBenefits();
+  const differentiators = getKeyDifferentiators();
 
   return `
     <section>
-      <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Key Differentiators</h2>
+      <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Key Benefits</h2>
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        ${benefits.map(b => `
+          <div class="card p-4 text-center">
+            <div class="mx-auto mb-2 w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center">
+              <i data-lucide="${b.icon}" class="w-5 h-5 text-emerald-600 dark:text-emerald-400"></i>
+            </div>
+            <p class="text-sm font-semibold text-gray-900 dark:text-gray-100">${b.title}</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">${b.description}</p>
+            ${b.sourceUrl ? `<a href="${b.sourceUrl}" target="_blank" rel="noopener" class="inline-flex items-center gap-1 mt-2 text-xs text-indigo-500 dark:text-indigo-400 hover:underline"><i data-lucide="external-link" class="w-3 h-3"></i>${b.source}</a>` : ''}
+          </div>
+        `).join('')}
+      </div>
+
+      <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mt-8 mb-4">Key Differentiators</h2>
       <div class="grid gap-3 sm:grid-cols-2">
         ${differentiators.map(d => `
           <div class="card p-4 flex gap-3 items-start">
@@ -49,20 +63,8 @@ function renderSummary() {
             <div>
               <p class="text-sm font-semibold text-gray-900 dark:text-gray-100">${d.title}</p>
               <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">${d.description}</p>
+              ${d.url ? `<a href="${d.url}" target="_blank" rel="noopener" class="inline-flex items-center gap-1 mt-1.5 text-xs text-indigo-500 dark:text-indigo-400 hover:underline"><i data-lucide="external-link" class="w-3 h-3"></i>Docs</a>` : ''}
             </div>
-          </div>
-        `).join('')}
-      </div>
-
-      <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mt-8 mb-4">Key Benefits</h2>
-      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        ${benefits.map(b => `
-          <div class="card p-4 text-center">
-            <div class="mx-auto mb-2 w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center">
-              <i data-lucide="${b.icon}" class="w-5 h-5 text-emerald-600 dark:text-emerald-400"></i>
-            </div>
-            <p class="text-sm font-semibold text-gray-900 dark:text-gray-100">${b.title}</p>
-            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">${b.description}</p>
           </div>
         `).join('')}
       </div>
@@ -120,7 +122,6 @@ function renderProof() {
       </div>
 
       <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mt-8 mb-4">Success Stories</h2>
-      <p class="text-xs text-gray-400 dark:text-gray-500 mb-3 italic">Placeholder data — replace with real merchant stories.</p>
       <div class="grid gap-4 sm:grid-cols-2">
         ${stories.map(s => `
           <div class="card p-5">
@@ -134,6 +135,7 @@ function renderProof() {
             <blockquote class="mt-3 text-xs italic text-gray-500 dark:text-gray-400 border-l-2 border-indigo-300 dark:border-indigo-700 pl-3">
               "${s.quote}"
             </blockquote>
+            ${s.url ? `<a href="${s.url}" target="_blank" rel="noopener" class="inline-flex items-center gap-1 mt-3 text-xs text-indigo-500 dark:text-indigo-400 hover:underline"><i data-lucide="external-link" class="w-3 h-3"></i>Read full case study</a>` : ''}
           </div>
         `).join('')}
       </div>

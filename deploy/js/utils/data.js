@@ -183,34 +183,42 @@ export const KEY_DIFFERENTIATORS = [
   {
     title: 'Checkout Extensibility',
     description: 'Full control over the checkout experience with UI Extensions, Functions, and Branding API. The single most impactful differentiator for merchants needing custom checkout flows.',
+    url: 'https://shopify.dev/docs/api/checkout-ui-extensions',
   },
   {
     title: 'B2B on Shopify',
     description: 'Native wholesale channel with company accounts, custom price lists, payment terms, and quantity rules — no third-party app needed.',
+    url: 'https://help.shopify.com/en/manual/b2b',
   },
   {
     title: 'Shopify Audiences',
-    description: 'Leverage Shopify network data for high-intent retargeting and lookalike audiences. Proven to lower customer acquisition costs.',
+    description: 'Leverage Shopify network data for high-intent retargeting and lookalike audiences. Proven to lower customer acquisition costs by up to 50%.',
+    url: 'https://www.shopify.com/ca/enterprise/blog/shopify-audiences',
   },
   {
     title: 'Expansion Stores',
     description: 'Launch up to 9 additional storefronts for multi-brand or multi-region strategies under one organization.',
+    url: 'https://help.shopify.com/en/manual/organization-settings/stores',
   },
   {
     title: 'Bot Protection',
     description: 'Checkout-level bot protection that stops automated purchasing during flash sales and product drops.',
+    url: 'https://help.shopify.com/en/manual/intro-to-shopify/pricing-plans/plans-features/shopify-plus-plan',
   },
   {
     title: 'Launchpad',
     description: 'Schedule and automate product launches, flash sales, and theme changes — essential for high-volume campaign operations.',
+    url: 'https://help.shopify.com/en/manual/promoting-marketing/create-marketing/launchpad',
   },
   {
     title: 'Exclusive APIs',
     description: 'Access to Checkout, Functions, Fulfillment, User, Gift Cards, and Multipass APIs for SSO, loyalty, and headless commerce.',
+    url: 'https://shopify.dev/docs/api',
   },
   {
     title: 'Custom Payment Gateways',
     description: 'Eligibility for custom payment gateway app integrations — Plus-only access for merchants with specialized payment needs.',
+    url: 'https://help.shopify.com/en/manual/intro-to-shopify/pricing-plans/plans-features/shopify-plus-plan',
   },
 ];
 
@@ -219,31 +227,43 @@ export const KEY_BENEFITS = [
     icon: 'trending-down',
     title: 'Lower Total Cost of Ownership at Scale',
     description: 'Reduced transaction fees (0.15-0.30% vs 0.5%), included POS Pro, and lower SP rates mean Plus pays for itself at the right GMV.',
+    source: 'Shopify Plus Plan',
+    sourceUrl: 'https://help.shopify.com/en/manual/intro-to-shopify/pricing-plans/plans-features/shopify-plus-plan',
   },
   {
     icon: 'zap',
     title: '10x API Capacity',
     description: '400 requests/second vs 40 — critical for merchants with complex integrations, high catalog volumes, or headless architectures.',
+    source: 'Shopify Dev Changelog',
+    sourceUrl: 'https://shopify.dev/changelog/increased-admin-api-rate-limits-for-shopify-plus',
   },
   {
     icon: 'store',
     title: 'POS Pro Included',
     description: 'Save $89/location/month. For merchants with 5+ retail locations, POS Pro alone can justify the upgrade.',
+    source: 'Shopify Plus Plan',
+    sourceUrl: 'https://help.shopify.com/en/manual/intro-to-shopify/pricing-plans/plans-features/shopify-plus-plan',
   },
   {
     icon: 'shopping-cart',
     title: 'Own the Checkout Experience',
     description: 'Checkout UI Extensions and Functions let merchants customize payment, delivery, and branding — impossible on Advanced.',
+    source: 'Checkout UI Extensions Docs',
+    sourceUrl: 'https://shopify.dev/docs/api/checkout-ui-extensions',
   },
   {
     icon: 'users',
     title: 'Unlimited Staff Accounts',
     description: 'No more hitting the 15-account ceiling. Scale your team without worrying about seat limits.',
+    source: 'Shopify Plus Plan',
+    sourceUrl: 'https://help.shopify.com/en/manual/intro-to-shopify/pricing-plans/plans-features/shopify-plus-plan',
   },
   {
     icon: 'shield',
     title: 'Dedicated Success Manager',
     description: 'Priority 24/7 support with a dedicated Merchant Success Manager who knows your business.',
+    source: 'Shopify Plus Plan',
+    sourceUrl: 'https://help.shopify.com/en/manual/intro-to-shopify/pricing-plans/plans-features/shopify-plus-plan',
   },
 ];
 
@@ -320,39 +340,62 @@ export const FEATURE_CATEGORIES = [
   },
 ];
 
-/** Placeholder — replace with actual public URLs. */
 export const PUBLIC_SOURCES = [
-  { label: 'Shopify Plus Homepage', url: 'https://www.shopify.com/plus', description: 'Official Plus feature overview and positioning' },
-  { label: 'Shopify Plus Pricing', url: 'https://www.shopify.com/plus/pricing', description: 'Public pricing page with plan comparison' },
+  { label: 'Shopify Plus Plan — Help Center', url: 'https://help.shopify.com/en/manual/intro-to-shopify/pricing-plans/plans-features/shopify-plus-plan', description: 'Official feature list, pricing, and plan details' },
+  { label: 'Shopify Plus Homepage', url: 'https://www.shopify.com/plus', description: 'Public positioning, enterprise features, and merchant stories' },
+  { label: 'Checkout UI Extensions — Dev Docs', url: 'https://shopify.dev/docs/api/checkout-ui-extensions', description: 'Developer documentation for checkout customization (Plus-only)' },
+  { label: 'API Rate Limits — Dev Docs', url: 'https://shopify.dev/docs/api/usage/rate-limits', description: 'Rate limit details: Plus gets 10x standard limits' },
   { label: 'Shopify Editions (Changelog)', url: 'https://www.shopify.com/editions', description: 'Latest platform updates and new Plus features' },
-  { label: 'Shopify Help Center — Plan Features', url: 'https://help.shopify.com/en/manual/intro-to-shopify/pricing-plans/plans-features', description: 'Detailed feature comparison across all plans' },
-  { label: 'Shopify Plus Academy', url: 'https://academy.shopify.com', description: 'Training resources for Plus merchants and partners' },
+  { label: 'B2B on Shopify — Help Center', url: 'https://help.shopify.com/en/manual/b2b', description: 'B2B features: company accounts, price lists, payment terms' },
+  { label: 'Launchpad — Help Center', url: 'https://help.shopify.com/en/manual/promoting-marketing/create-marketing/launchpad', description: 'Scheduled events, flash sales, and automation' },
+  { label: 'Shopify Plus Case Studies', url: 'https://www.shopify.com/plus/customers', description: 'Public success stories from Plus merchants worldwide' },
 ];
 
-/** Placeholder — replace with real merchant stories and quantified benefits. */
+/**
+ * Real public case studies from shopify.com/case-studies.
+ * Each entry links to the full story.
+ */
 export const SUCCESS_STORIES = [
   {
-    merchant: 'Example Merchant A',
-    scenario: 'Upgraded from Advanced to Plus',
-    benefit: 'Saved $28K+/year from lower processing fees and included POS Pro across 12 locations.',
-    quote: 'The numbers made it obvious — Plus paid for itself within 3 months.',
+    merchant: 'Peepers',
+    scenario: 'Checkout Extensibility',
+    benefit: '30% increase in conversions with custom checkout features including a free shipping motivator.',
+    quote: 'Custom checkout let us remove friction and drive higher conversion at the moment that matters most.',
+    url: 'https://www.shopify.com/uk/case-studies/peepers',
   },
   {
-    merchant: 'Example Merchant B',
-    scenario: 'Moved to Plus for B2B',
-    benefit: 'Launched wholesale channel natively, replacing $2K/month in third-party app costs.',
-    quote: 'B2B on Shopify replaced three separate tools we were stitching together.',
+    merchant: 'Beard & Blade',
+    scenario: 'B2B on Shopify',
+    benefit: 'Doubled wholesale revenue after migrating from Adobe Commerce. Wholesale AOV of $296 (5x retail AOV).',
+    quote: 'The self-serve wholesale portal eliminated manual order processing entirely.',
+    url: 'https://www.shopify.com/case-studies/beard-and-blade',
   },
   {
-    merchant: 'Example Merchant C',
-    scenario: 'Upgraded for Checkout Extensibility',
-    benefit: 'Custom checkout increased conversion rate by 4.2% within first quarter.',
-    quote: 'We finally had full control over the checkout — that was the tipping point.',
+    merchant: 'Happy Hippo',
+    scenario: 'Shopify Audiences',
+    benefit: '72% lower customer acquisition costs, 4.7x ROAS, and 86% new-to-brand customer rate.',
+    quote: 'Shopify Audiences gave us targeting precision we couldn\'t get anywhere else.',
+    url: 'https://www.shopify.com/uk/case-studies/happy-hippo',
   },
   {
-    merchant: 'Example Merchant D',
-    scenario: 'Scaled to Plus for API limits',
-    benefit: '10x API capacity eliminated rate-limiting issues during peak traffic, supporting 50K+ SKU catalog sync.',
-    quote: 'We were constantly hitting the 40 req/s wall. Plus removed that bottleneck overnight.',
+    merchant: 'Schleich',
+    scenario: 'Migrated to Plus',
+    benefit: '31% reduction in checkout abandonment after migrating to Shopify Plus.',
+    quote: 'The checkout experience became seamless — abandonment dropped almost immediately.',
+    url: 'https://www.shopify.com/case-studies/schleich',
+  },
+  {
+    merchant: 'SWATI',
+    scenario: 'Migrated to Plus (EMEA)',
+    benefit: '40% conversion boost, 45% revenue increase in key markets, 30% lower CAC.',
+    quote: 'Employee onboarding went 10x faster and we saw immediate results across every metric.',
+    url: 'https://www.shopify.com/uk/case-studies/swati',
+  },
+  {
+    merchant: 'Kowtow',
+    scenario: 'POS Pro & Omnichannel',
+    benefit: '30% year-on-year revenue growth across retail stores with unified customer data.',
+    quote: 'Unified online and in-store data transformed how we personalize the customer experience.',
+    url: 'https://www.shopify.com/retail/kowtow',
   },
 ];

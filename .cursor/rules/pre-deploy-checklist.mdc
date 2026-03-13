@@ -27,3 +27,10 @@ Both must show the same version string.
 - The version in code must match the git tag / commit message
 - Commit message format: `v0.x.x — Short description of what changed`
 - Do NOT deploy uncommitted changes — commit first, then deploy
+
+## Deploy Command
+After committing, provide the user with a ready-to-copy deploy command:
+```
+cd /Users/rickwichgers/Documents/AI-tools/advanced-plus && quick deploy dist/ advanced-vs-plus
+```
+The deploy script (`./scripts/deploy.sh`) requires interactive confirmation, so always give the user a direct command to run in their terminal. Run the build step first (`rsync -a --exclude='client/' deploy/ dist/`) if dist/ is stale.

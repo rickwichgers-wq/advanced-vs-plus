@@ -9,7 +9,7 @@
 | **App name** | PlusCase |
 | **Tagline** | Make the case for Plus. |
 | **Quick slug** | `pluscase.quick.shopify.io` |
-| **Version** | 0.1.1 |
+| **Version** | 0.1.2 |
 | **Audience** | Account Executives & Solutions Consultants selling Shopify Plus vs Advanced |
 | **Maintainers** | Rick Wichgers & Tadib — Solutions Consulting, EMEA |
 
