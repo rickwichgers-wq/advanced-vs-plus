@@ -1,6 +1,6 @@
 export { APP_NAME, TAGLINE, CONTEXT_LINE, PAGE_DESCRIPTIONS, EMPTY_STATES } from './copy.js';
 
-export const VERSION = '0.1.0';
+export const VERSION = '0.1.1';
 
 export const NAV_ITEMS = [
   { id: 'home',        label: 'Home',        icon: 'home',        href: '/index.html' },

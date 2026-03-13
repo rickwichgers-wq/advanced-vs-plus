@@ -1,4 +1,10 @@
-import { FEATURE_CATEGORIES, HARD_DIFFERENTIATORS } from '../utils/data.js';
+import {
+  FEATURE_CATEGORIES,
+  KEY_DIFFERENTIATORS,
+  KEY_BENEFITS,
+  PUBLIC_SOURCES,
+  SUCCESS_STORIES,
+} from '../utils/data.js';
 
 export function getCategories() {
   return FEATURE_CATEGORIES;
@@ -8,8 +14,20 @@ export function getCategoryById(id) {
   return FEATURE_CATEGORIES.find(c => c.id === id) || null;
 }
 
-export function getHardDifferentiators() {
-  return HARD_DIFFERENTIATORS;
+export function getKeyDifferentiators() {
+  return KEY_DIFFERENTIATORS;
+}
+
+export function getKeyBenefits() {
+  return KEY_BENEFITS;
+}
+
+export function getPublicSources() {
+  return PUBLIC_SOURCES;
+}
+
+export function getSuccessStories() {
+  return SUCCESS_STORIES;
 }
 
 export function searchFeatures(query) {

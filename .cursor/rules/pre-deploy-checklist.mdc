@@ -1,0 +1,29 @@
+---
+description: Pre-deploy checklist — version, changelog, and features must stay in sync with git commits
+alwaysApply: true
+---
+
+# Pre-Deploy Checklist
+
+Before every deploy (`./scripts/deploy.sh`), ensure these stay in sync:
+
+## Version Bump
+1. `deploy/js/utils/brand.js` → `VERSION` constant
+2. `MANIFEST.md` → Version field in Identity table
+
+Both must show the same version string.
+
+## Changelog
+- `deploy/changelog.html` — Add a new card **above** previous entries
+- Version tag and date must match the `VERSION` in `brand.js`
+- Each line item must correspond to an actual committed change
+- Use `plus` icon (emerald) for new features, `refresh-cw` icon (blue) for changes/refactors
+
+## Features Page
+- `deploy/features.html` — Update if the change adds, removes, or modifies user-facing capabilities
+- Skip if the change is purely internal (refactor, bug fix, data update)
+
+## Git Alignment
+- The version in code must match the git tag / commit message
+- Commit message format: `v0.x.x — Short description of what changed`
+- Do NOT deploy uncommitted changes — commit first, then deploy

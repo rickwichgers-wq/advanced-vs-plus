@@ -9,7 +9,7 @@
 | App shell | Done | Sidebar, header, nav, auth, toast, theme |
 | Homepage | Done | Quick-access cards, recent activity (if data) |
 | Calculators | Done | Fee Savings, TCO, POS Pro, ROI with region selector |
-| Comparisons | Done | 6 categories: Overview, Checkout, B2B, API, Support, Commerce |
+| Comparisons | Done | 3-section layout: Summary (differentiators + benefits), Details (5 tabs: Functional, Technical, Commercial, Operational, Personal), Proof (public sources + success stories — placeholder data) |
 | Generators | Done | One-pager, email, talk track, exec summary (quick.ai) |
 | Features page | Done | Feature list |
 | Changelog | Done | Version history |
@@ -28,7 +28,7 @@
 | PDF export for calculations/generators | Medium | Medium |
 | Plus value qualifier questionnaire | Medium | Medium |
 | Upgrade identifier (proactive pipeline) | Lower | High |
-| Proof points / conversion uplift data | Lower | Blocked (no data source) |
+| Proof points / conversion uplift data | Medium | Structure built — needs real merchant stories and public source links |
 | Align MANIFEST slug with deploy script | Low | Trivial |
 
 ## Known Issues

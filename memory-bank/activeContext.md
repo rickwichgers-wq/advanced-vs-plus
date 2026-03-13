@@ -20,9 +20,15 @@
 - **Rates & data layer (Mar 2026):**
   - Added `memory-bank/RATES-REFERENCE.md` — source-of-truth doc from Internal Help Center + master rate sheet
   - `EMEA_COUNTRIES` in `data.js` now has `sp` object with Advanced/Plus domestic/EEA/intl/amex rates per country
+- **Comparisons page restructure (Mar 2026):**
+  - Replaced flat 6-tab feature grid with 3-section layout: Summary, Details, Proof
+  - Summary: KEY_DIFFERENTIATORS (value-statement cards) + KEY_BENEFITS (outcome-framed propositions)
+  - Details: 5 tabs — Functional, Technical, Commercial, Operational, Personal (re-categorized features)
+  - Proof: Public source links + success story cards (placeholder data — needs real content)
+  - Replaced `HARD_DIFFERENTIATORS` with `KEY_DIFFERENTIATORS` / `KEY_BENEFITS` in data.js
+  - Added `PUBLIC_SOURCES` and `SUCCESS_STORIES` exports
 - Initial release with full feature set:
   - Fee Savings, TCO, POS Pro, ROI calculators
-  - Feature comparisons (6 categories)
   - AI generators (one-pagers, emails, talk tracks, exec summaries)
   - Resources page (links to decks, Guru, Vault)
   - Dark mode, responsive layout
@@ -39,7 +45,7 @@
 
 - **MANIFEST says:** Quick slug `pluscase.quick.shopify.io` — **deploy script uses** `advanced-vs-plus`. The live URL is `advanced-vs-plus.quick.shopify.io`. Consider aligning MANIFEST.
 - **Resources page** — Contains extensive links; keep updated as new enablement materials are released.
-- **Proof points** — Research identifies demand for "conversion uplift graph" and "brands that upgraded" — no data source yet. Future enhancement.
+- **Proof points** — Comparisons page now has Proof section with placeholder success stories and public source links. Needs real merchant data to replace placeholders.
 
 ## Channels
 
