@@ -49,8 +49,8 @@ window.quick = {
   },
 
   ai: {
-    async chat({ messages }) {
-      // Simulated AI response for local development
+    async chat(messagesOrObj) {
+      const messages = Array.isArray(messagesOrObj) ? messagesOrObj : messagesOrObj?.messages || [];
       const userMsg = messages.find(m => m.role === 'user')?.content || '';
       return {
         content: `[Local Dev — AI stub]\n\nThis is a placeholder response for local testing. In production, this will call the OpenAI proxy via quick.ai.\n\nYour prompt was:\n${userMsg.slice(0, 200)}...`,

@@ -12,7 +12,7 @@ async function callAI(prompt, { system = '' } = {}) {
   if (system) messages.push({ role: 'system', content: system });
   messages.push({ role: 'user', content: prompt });
 
-  const response = await window.quick.ai.chat({ messages });
+  const response = await window.quick.ai.chat(messages);
   return response?.content || response?.message?.content || '';
 }
 
