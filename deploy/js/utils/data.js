@@ -399,3 +399,161 @@ export const SUCCESS_STORIES = [
     url: 'https://www.shopify.com/retail/kowtow',
   },
 ];
+
+export const OUTCOME_MAP = {
+  'lower-tco': {
+    label: 'Lower Total Cost at Scale',
+    icon: 'trending-down',
+    description: 'Reduce transaction fees, unlock included POS Pro, and lower SP rates as GMV grows.',
+    differentiators: ['Custom Payment Gateways'],
+    benefits: ['Lower Total Cost of Ownership at Scale', 'POS Pro Included'],
+    stories: ['Schleich', 'SWATI'],
+    proofPoints: [
+      'Plus transaction fees drop to 0.15-0.30% vs 0.5% on Advanced',
+      'POS Pro included saves $89/location/month',
+      '0% 3rd-party transaction fee when SP enabled (vs 0.5-0.6% on Advanced)',
+    ],
+  },
+  'own-checkout': {
+    label: 'Own the Checkout Experience',
+    icon: 'shopping-cart',
+    description: 'Customize payments, delivery, branding, and post-purchase with UI Extensions and Functions.',
+    differentiators: ['Checkout Extensibility', 'Exclusive APIs'],
+    benefits: ['Own the Checkout Experience'],
+    stories: ['Peepers', 'Schleich'],
+    proofPoints: [
+      'Peepers saw 30% conversion increase with custom checkout',
+      'Schleich reduced checkout abandonment by 31%',
+      'Checkout UI Extensions, Functions, and Branding API are Plus-only',
+    ],
+  },
+  'go-b2b': {
+    label: 'Launch B2B / Wholesale',
+    icon: 'building',
+    description: 'Native wholesale with company accounts, custom price lists, and payment terms — no app needed.',
+    differentiators: ['B2B on Shopify'],
+    benefits: [],
+    stories: ['Beard & Blade'],
+    proofPoints: [
+      'Beard & Blade doubled wholesale revenue after migrating to Plus',
+      'Wholesale AOV of $296 (5x retail AOV)',
+      'Company accounts, Net 30/60 payment terms, quantity rules — all native',
+    ],
+  },
+  'expand-intl': {
+    label: 'Expand Internationally',
+    icon: 'globe',
+    description: 'Launch up to 9 expansion stores for multi-brand or multi-region strategies under one org.',
+    differentiators: ['Expansion Stores'],
+    benefits: [],
+    stories: ['SWATI'],
+    proofPoints: [
+      'Up to 9 expansion stores per organization',
+      'SWATI saw 45% revenue increase in key markets after Plus migration',
+      'Manage all storefronts from a single admin with organization-level analytics',
+    ],
+  },
+  'acquire-cheaper': {
+    label: 'Lower Customer Acquisition Cost',
+    icon: 'target',
+    description: 'Leverage Shopify network data for high-intent retargeting and lookalike audiences.',
+    differentiators: ['Shopify Audiences'],
+    benefits: [],
+    stories: ['Happy Hippo'],
+    proofPoints: [
+      'Happy Hippo achieved 72% lower CAC with Shopify Audiences',
+      '4.7x ROAS and 86% new-to-brand customer rate',
+      'Proven to lower acquisition costs by up to 50%',
+    ],
+  },
+  'scale-retail': {
+    label: 'Scale Retail / POS Operations',
+    icon: 'store',
+    description: 'POS Pro included at every location, unified inventory, and omnichannel customer data.',
+    differentiators: [],
+    benefits: ['POS Pro Included'],
+    stories: ['Kowtow'],
+    proofPoints: [
+      'POS Pro included (saves $89/location/month)',
+      'Kowtow saw 30% YoY revenue growth with unified omnichannel data',
+      'Up to 200 locations with unified inventory management',
+    ],
+  },
+  'automate-ops': {
+    label: 'Automate Campaigns & Operations',
+    icon: 'zap',
+    description: 'Schedule product launches, flash sales, and theme changes. Protect drops with bot protection.',
+    differentiators: ['Launchpad', 'Bot Protection'],
+    benefits: [],
+    stories: [],
+    proofPoints: [
+      'Launchpad automates product drops, flash sales, and theme rollouts',
+      'Bot protection blocks automated purchasing during high-demand events',
+      'Unlimited staff accounts eliminate seat-limit bottlenecks for growing teams',
+    ],
+  },
+  'unlock-integrations': {
+    label: 'Unlock Advanced Integrations',
+    icon: 'plug',
+    description: '10x API rate limits, exclusive APIs, and custom gateway support for headless and complex stacks.',
+    differentiators: ['Exclusive APIs', 'Custom Payment Gateways'],
+    benefits: ['10x API Capacity'],
+    stories: [],
+    proofPoints: [
+      '400 req/s vs 40 req/s API rate limits',
+      'Checkout, Functions, Fulfillment, User, Gift Cards, and Multipass APIs',
+      'Custom payment gateway app eligibility (Plus-only)',
+    ],
+  },
+};
+
+export const VERTICAL_PROFILES = {
+  fashion: {
+    label: 'Fashion & Apparel',
+    commonOutcomes: ['own-checkout', 'acquire-cheaper', 'expand-intl', 'scale-retail'],
+    talkingAngle: 'Brand experience, international expansion, and omnichannel retail are top priorities.',
+  },
+  'food-bev': {
+    label: 'Food & Beverage',
+    commonOutcomes: ['lower-tco', 'automate-ops', 'scale-retail'],
+    talkingAngle: 'Subscription, flash sales, and multi-location retail drive growth.',
+  },
+  beauty: {
+    label: 'Beauty & Cosmetics',
+    commonOutcomes: ['own-checkout', 'acquire-cheaper', 'expand-intl'],
+    talkingAngle: 'Checkout personalization, audience targeting, and international DTC expansion.',
+  },
+  electronics: {
+    label: 'Electronics & Tech',
+    commonOutcomes: ['lower-tco', 'unlock-integrations', 'automate-ops'],
+    talkingAngle: 'Complex integrations, high-volume catalog management, and cost efficiency at scale.',
+  },
+  'home-garden': {
+    label: 'Home & Garden',
+    commonOutcomes: ['scale-retail', 'lower-tco', 'own-checkout'],
+    talkingAngle: 'Omnichannel retail, cost savings at scale, and checkout optimization.',
+  },
+  sports: {
+    label: 'Sports & Outdoors',
+    commonOutcomes: ['automate-ops', 'acquire-cheaper', 'own-checkout'],
+    talkingAngle: 'Product drops, audience building, and checkout conversion.',
+  },
+  'b2b-wholesale': {
+    label: 'B2B / Wholesale',
+    commonOutcomes: ['go-b2b', 'unlock-integrations', 'lower-tco'],
+    talkingAngle: 'Native B2B capabilities, ERP integrations, and volume-based cost savings.',
+  },
+  other: {
+    label: 'Other',
+    commonOutcomes: ['lower-tco', 'own-checkout'],
+    talkingAngle: 'Cost optimization and checkout customization as universal value drivers.',
+  },
+};
+
+export const GMV_RANGES = [
+  { value: 'under-1m', label: '< $1M' },
+  { value: '1m-5m', label: '$1M – $5M' },
+  { value: '5m-10m', label: '$5M – $10M' },
+  { value: '10m-25m', label: '$10M – $25M' },
+  { value: '25m-plus', label: '$25M+' },
+];

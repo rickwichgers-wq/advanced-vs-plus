@@ -6,7 +6,7 @@ export const PAGE_DESCRIPTIONS = {
   home:        { title: 'Home', subtitle: 'Your sales enablement dashboard' },
   calculators: { title: 'Calculators', subtitle: 'TCO, fee savings, POS Pro, and ROI calculators' },
   comparisons: { title: 'Comparisons', subtitle: 'Feature-by-feature Advanced vs Plus breakdowns' },
-  generators:  { title: 'Generators', subtitle: 'AI-powered document and text generation' },
+  generators:  { title: 'Rep Prep', subtitle: 'Outcome-based meeting prep and AI document generation' },
   settings:    { title: 'Settings', subtitle: 'Preferences and configuration' },
   resources:   { title: 'Resources', subtitle: 'Existing tools, docs, decks, and channels' },
   features:    { title: 'Features', subtitle: 'What this tool can do' },
@@ -25,8 +25,8 @@ export const EMPTY_STATES = {
     icon: 'columns',
   },
   generators: {
-    title: 'No documents yet',
-    message: 'Generate a tailored one-pager, email, or talk track for your deal.',
-    icon: 'file-text',
+    title: 'Prep for your next meeting',
+    message: 'Select merchant outcomes to generate a personalized value story, talking points, and objection drill.',
+    icon: 'briefcase',
   },
 };

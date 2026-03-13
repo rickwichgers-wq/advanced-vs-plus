@@ -1,16 +1,18 @@
-import { $ } from '../utils/render.js';
 import { REGIONS } from '../utils/data.js';
 
-export function renderGeneratorForm(containerId, { fields = [], onGenerate, generateLabel = 'Generate' }) {
-  const container = typeof containerId === 'string' ? $(containerId) : containerId;
+export function renderGeneratorForm(containerId, { fields = [], onGenerate, generateLabel = 'Generate', namespace = '' }) {
+  const container = typeof containerId === 'string' ? document.querySelector(containerId) : containerId;
   if (!container) return;
 
+  const pfx = namespace ? `${namespace}-` : '';
+
   const fieldsHTML = fields.map(field => {
+    const fid = `${pfx}${field.id}`;
     if (field.type === 'textarea') {
       return `
         <div>
           <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">${field.label}</label>
-          <textarea id="${field.id}" class="form-input" rows="${field.rows || 3}"
+          <textarea id="${fid}" class="form-input" rows="${field.rows || 3}"
             placeholder="${field.placeholder || ''}"></textarea>
         </div>`;
     }
@@ -19,7 +21,7 @@ export function renderGeneratorForm(containerId, { fields = [], onGenerate, gene
       return `
         <div>
           <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">${field.label}</label>
-          <select id="${field.id}" class="form-input">${opts}</select>
+          <select id="${fid}" class="form-input">${opts}</select>
         </div>`;
     }
     if (field.type === 'region') {
@@ -29,22 +31,24 @@ export function renderGeneratorForm(containerId, { fields = [], onGenerate, gene
       return `
         <div>
           <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">${field.label}</label>
-          <select id="${field.id}" class="form-input">${regionOpts}</select>
+          <select id="${fid}" class="form-input">${regionOpts}</select>
         </div>`;
     }
     return `
       <div>
         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">${field.label}</label>
-        <input type="${field.type || 'text'}" id="${field.id}" class="form-input"
+        <input type="${field.type || 'text'}" id="${fid}" class="form-input"
           placeholder="${field.placeholder || ''}"
           ${field.value !== undefined ? `value="${field.value}"` : ''}>
       </div>`;
   }).join('');
 
+  const submitId = `${pfx}gen-submit`;
+
   container.innerHTML = `
     <div class="space-y-4">
       ${fieldsHTML}
-      <button id="gen-submit" class="btn btn-primary w-full justify-center">
+      <button id="${submitId}" class="btn btn-primary w-full justify-center">
         <i data-lucide="sparkles" class="w-4 h-4"></i>
         ${generateLabel}
       </button>
@@ -52,10 +56,10 @@ export function renderGeneratorForm(containerId, { fields = [], onGenerate, gene
   `;
 
   if (onGenerate) {
-    container.querySelector('#gen-submit').addEventListener('click', () => {
+    container.querySelector(`#${submitId}`).addEventListener('click', () => {
       const values = {};
       fields.forEach(f => {
-        const el = $(`#${f.id}`);
+        const el = container.querySelector(`#${pfx}${f.id}`);
         if (!el) return;
         values[f.id] = el.value;
       });
@@ -65,7 +69,7 @@ export function renderGeneratorForm(containerId, { fields = [], onGenerate, gene
 }
 
 export function renderPreview(containerId, content, { loading = false } = {}) {
-  const container = typeof containerId === 'string' ? $(containerId) : containerId;
+  const container = typeof containerId === 'string' ? document.querySelector(containerId) : containerId;
   if (!container) return;
 
   if (loading) {
@@ -81,12 +85,14 @@ export function renderPreview(containerId, content, { loading = false } = {}) {
       <div class="whitespace-pre-wrap text-sm text-gray-700 dark:text-gray-300">${content}</div>
     </div>
     <div class="flex items-center gap-2 mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-      <button id="copy-output" class="btn btn-secondary text-xs">
+      <button class="btn btn-secondary text-xs copy-output-btn">
         <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy
-      </button>
-      <button id="save-output" class="btn btn-secondary text-xs">
-        <i data-lucide="save" class="w-3.5 h-3.5"></i> Save
       </button>
     </div>
   `;
+
+  container.querySelector('.copy-output-btn')?.addEventListener('click', () => {
+    const text = container.querySelector('.whitespace-pre-wrap')?.textContent || '';
+    navigator.clipboard.writeText(text);
+  });
 }

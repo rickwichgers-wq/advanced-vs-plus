@@ -9,7 +9,7 @@
 | **App name** | PlusCase |
 | **Tagline** | Make the case for Plus. |
 | **Quick slug** | `pluscase.quick.shopify.io` |
-| **Version** | 0.1.2 |
+| **Version** | 0.2.0 |
 | **Audience** | Account Executives & Solutions Consultants selling Shopify Plus vs Advanced |
 | **Maintainers** | Rick Wichgers & Tadib — Solutions Consulting, EMEA |
 
@@ -79,7 +79,7 @@ advanced-plus/
 | Home | `/index.html` | Dashboard with quick-access cards and recent activity |
 | Calculators | `/calculators.html` | Fee Savings, TCO, POS Pro, ROI calculators |
 | Comparisons | `/comparisons.html` | 3-section layout: Summary (key differentiators + benefits), Details (5 tabs: Functional, Technical, Commercial, Operational, Personal), Proof (public sources + success stories) |
-| Generators | `/generators.html` | AI one-pagers, emails, talk tracks, exec summaries |
+| Rep Prep | `/generators.html` | Outcome-based meeting prep (value story, talking points, objection drill, proof) + AI document generators (one-pager, email, talk track, exec summary) with shared merchant context and calculator auto-detection |
 | Features | `/features.html` | What this tool can do |
 | Changelog | `/changelog.html` | Version history |
 | Settings | `/settings.html` | Theme, region, cache, sign out |
