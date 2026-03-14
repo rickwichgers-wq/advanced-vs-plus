@@ -47,9 +47,10 @@ function buildOutcomeContext(selectedOutcomes, calcData) {
   return { outcomeLines, calcContext };
 }
 
-export async function generateValueStory({ merchantName, vertical, region, gmv, selectedOutcomes, calcData }) {
+export async function generateValueStory({ merchantName, vertical, region, gmv, selectedOutcomes, calcData, additionalContext }) {
   const verticalProfile = VERTICAL_PROFILES[vertical];
   const { outcomeLines, calcContext } = buildOutcomeContext(selectedOutcomes, calcData);
+  const addCtx = additionalContext ? `\nAdditional context from the rep:\n${additionalContext}` : '';
 
   const prompt = `Write a compelling 3-paragraph value story for upgrading ${merchantName || 'this merchant'} from Shopify Advanced to Shopify Plus.
 
@@ -57,30 +58,37 @@ Vertical: ${verticalProfile?.label || vertical || 'General'}
 ${verticalProfile ? `Selling angle: ${verticalProfile.talkingAngle}` : ''}
 Region: ${region || 'Not specified'}
 GMV range: ${gmv || 'Not specified'}
+${addCtx}
 
 Selected business outcomes and proof:
 ${outcomeLines}
 ${calcContext}
 
 Structure:
-1. Open with the merchant's situation and why the status quo limits growth
+1. Open with the merchant's situation and why the status quo limits growth — tie in their specific business issues and pain points
 2. Connect their specific outcomes to Plus capabilities with concrete numbers
 3. Close with the business impact and urgency
+
+FORMATTING: Use **bold** on key pain points, value drivers, and important numbers/metrics throughout the narrative. This helps the rep quickly scan for the most important talking points during a conversation.
+
+${additionalContext ? 'IMPORTANT: Weave the additional context (business issues, pains, goals) naturally into the story. Match those pains to the selected outcomes and show how Plus resolves them specifically.' : ''}
 
 Keep it under 300 words. Write in second person ("you/your"). Do not use bullet points — this should read as a narrative.`;
 
   return await callAI(prompt, { system: SYSTEM_PROMPT });
 }
 
-export async function generateTalkingPoints({ merchantName, vertical, region, gmv, selectedOutcomes, calcData }) {
+export async function generateTalkingPoints({ merchantName, vertical, region, gmv, selectedOutcomes, calcData, additionalContext }) {
   const verticalProfile = VERTICAL_PROFILES[vertical];
   const { outcomeLines, calcContext } = buildOutcomeContext(selectedOutcomes, calcData);
+  const addCtx = additionalContext ? `\nAdditional context from the rep:\n${additionalContext}` : '';
 
   const prompt = `Generate 5-7 merchant-specific talking points for a meeting with ${merchantName || 'this merchant'} about upgrading from Shopify Advanced to Shopify Plus.
 
 Vertical: ${verticalProfile?.label || vertical || 'General'}
 Region: ${region || 'Not specified'}
 GMV range: ${gmv || 'Not specified'}
+${addCtx}
 
 Selected business outcomes:
 ${outcomeLines}
@@ -90,14 +98,16 @@ Format each point as:
 **Say this:** [the actual phrase to use in conversation]
 **Because:** [the supporting evidence or data point]
 
+${additionalContext ? 'Tie the talking points to the merchant\'s specific business issues and pain points from the additional context.' : ''}
 Make them conversational, not scripted. Focus on outcomes, not features.`;
 
   return await callAI(prompt, { system: SYSTEM_PROMPT });
 }
 
-export async function generateObjectionDrill({ merchantName, vertical, region, gmv, selectedOutcomes, calcData, objectionFocus }) {
+export async function generateObjectionDrill({ merchantName, vertical, region, gmv, selectedOutcomes, calcData, objectionFocus, additionalContext }) {
   const verticalProfile = VERTICAL_PROFILES[vertical];
   const { outcomeLines, calcContext } = buildOutcomeContext(selectedOutcomes, calcData);
+  const addCtx = additionalContext ? `\nAdditional context from the rep:\n${additionalContext}` : '';
 
   const focusLine = objectionFocus
     ? `Pay special attention to this objection area: ${objectionFocus}`
@@ -109,6 +119,7 @@ Merchant: ${merchantName || 'Not specified'}
 Vertical: ${verticalProfile?.label || vertical || 'General'}
 GMV range: ${gmv || 'Not specified'}
 ${focusLine}
+${addCtx}
 
 Context — what they care about:
 ${outcomeLines}
@@ -121,6 +132,7 @@ For each objection, structure the response as:
 **Evidence:** [specific data point or case study]
 **Ask:** [follow-up question to move forward]
 
+${additionalContext ? 'Ground objections in the merchant\'s specific business issues and pain points from the additional context.' : ''}
 Tailor objections to this merchant's situation. Include at least one cost objection and one "we don't need it" objection.`;
 
   return await callAI(prompt, { system: SYSTEM_PROMPT });

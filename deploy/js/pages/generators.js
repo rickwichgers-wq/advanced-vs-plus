@@ -47,6 +47,7 @@ function getSharedContext() {
     vertical: $('#ctx-vertical')?.value || '',
     region: $('#ctx-region')?.value || '',
     gmv: $('#ctx-gmv')?.value || '',
+    additionalContext: $('#ctx-additionalContext')?.value || '',
     calcData: includeCalcData ? calcData : null,
   };
 }
@@ -120,6 +121,10 @@ function renderContent() {
               ${gmvOpts}
             </select>
           </div>
+        </div>
+        <div class="mt-3">
+          <label class="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Additional Context</label>
+          <textarea id="ctx-additionalContext" class="form-input" rows="2" placeholder="Business issues, pain points, goals, current challenges... (e.g. 'Struggling with checkout abandonment, planning B2B launch in Q3, need to reduce CAC')"></textarea>
         </div>
         ${calcBanner}
       </div>
