@@ -315,10 +315,26 @@ async function runRepPrep() {
   refreshIcons();
 }
 
+function mdToHTML(md) {
+  return md
+    .replace(/^### (.+)$/gm, '<h3 class="text-sm font-semibold text-gray-900 dark:text-gray-100 mt-4 mb-1">$1</h3>')
+    .replace(/^## (.+)$/gm, '<h2 class="text-base font-semibold text-gray-900 dark:text-gray-100 mt-5 mb-2">$1</h2>')
+    .replace(/^---$/gm, '<hr class="my-4 border-gray-200 dark:border-gray-700">')
+    .replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold text-gray-900 dark:text-gray-100">$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/^- (.+)$/gm, '<li class="ml-4 list-disc">$1</li>')
+    .replace(/^(\d+)\. (.+)$/gm, '<li class="ml-4 list-decimal">$2</li>')
+    .replace(/\n{2,}/g, '</p><p class="mb-3">')
+    .replace(/\n/g, '<br>')
+    .replace(/^/, '<p class="mb-3">')
+    .replace(/$/, '</p>');
+}
+
 function renderPrepResult(container, content) {
+  const formatted = mdToHTML(content);
   container.innerHTML = `
-    <div class="prose prose-sm dark:prose-invert max-w-none">
-      <div class="whitespace-pre-wrap text-sm text-gray-700 dark:text-gray-300">${content}</div>
+    <div class="prose prose-sm dark:prose-invert max-w-none text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+      ${formatted}
     </div>
     <div class="flex items-center gap-2 mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
       <button class="btn btn-secondary text-xs copy-prep-btn">
@@ -327,7 +343,7 @@ function renderPrepResult(container, content) {
     </div>
   `;
   container.querySelector('.copy-prep-btn')?.addEventListener('click', () => {
-    const text = container.querySelector('.whitespace-pre-wrap')?.textContent || '';
+    const text = container.querySelector('.prose')?.textContent || '';
     navigator.clipboard.writeText(text);
     showToast('Copied to clipboard', { type: 'success' });
   });
