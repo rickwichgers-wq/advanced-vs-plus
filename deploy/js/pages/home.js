@@ -54,11 +54,11 @@ async function renderContent() {
         <a href="/generators.html" class="card group cursor-pointer hover:border-indigo-300 dark:hover:border-indigo-700">
           <div class="flex items-center gap-3 mb-3">
             <div class="stat-icon bg-amber-100 dark:bg-amber-900/30">
-              <i data-lucide="file-text" class="w-4 h-4 text-amber-600 dark:text-amber-400"></i>
+              <i data-lucide="briefcase" class="w-4 h-4 text-amber-600 dark:text-amber-400"></i>
             </div>
-            <h3 class="font-semibold text-gray-900 dark:text-gray-100">Generators</h3>
+            <h3 class="font-semibold text-gray-900 dark:text-gray-100">Rep Prep</h3>
           </div>
-          <p class="text-sm text-gray-500 dark:text-gray-400">AI-powered one-pagers, emails, talk tracks, and executive summaries.</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400">Outcome-based meeting prep, value stories, talking points, and document generators.</p>
         </a>
       </div>
 
@@ -96,7 +96,10 @@ async function renderContent() {
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           ${recentCalcs.length ? `
             <div class="card">
-              <h3 class="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-3">Recent Calculations</h3>
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="text-sm font-semibold text-gray-900 dark:text-gray-100">Recent Calculations</h3>
+                <span class="text-[10px] text-gray-400 dark:text-gray-500">Stored in session only</span>
+              </div>
               <div class="space-y-2">
                 ${recentCalcs.map(c => `
                   <div class="flex items-center justify-between py-1.5 text-sm">
@@ -109,7 +112,10 @@ async function renderContent() {
           ` : ''}
           ${recentDocs.length ? `
             <div class="card">
-              <h3 class="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-3">Recent Documents</h3>
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="text-sm font-semibold text-gray-900 dark:text-gray-100">Recent Documents</h3>
+                <span class="text-[10px] text-gray-400 dark:text-gray-500">Stored in session only</span>
+              </div>
               <div class="space-y-2">
                 ${recentDocs.map(d => `
                   <div class="flex items-center justify-between py-1.5 text-sm">
