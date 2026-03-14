@@ -54,3 +54,18 @@ export function delegate(parentSelector, childSelector, event, handler) {
 export function badge(text, color = 'gray') {
   return `<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-${color}-100 text-${color}-700 dark:bg-${color}-900/30 dark:text-${color}-400">${text}</span>`;
 }
+
+export function mdToHTML(md) {
+  return md
+    .replace(/^### (.+)$/gm, '<h3 class="text-sm font-semibold text-gray-900 dark:text-gray-100 mt-4 mb-1">$1</h3>')
+    .replace(/^## (.+)$/gm, '<h2 class="text-base font-semibold text-gray-900 dark:text-gray-100 mt-5 mb-2">$1</h2>')
+    .replace(/^---$/gm, '<hr class="my-4 border-gray-200 dark:border-gray-700">')
+    .replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold text-gray-900 dark:text-gray-100">$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/^- (.+)$/gm, '<li class="ml-4 list-disc">$1</li>')
+    .replace(/^(\d+)\. (.+)$/gm, '<li class="ml-4 list-decimal">$2</li>')
+    .replace(/\n{2,}/g, '</p><p class="mb-3">')
+    .replace(/\n/g, '<br>')
+    .replace(/^/, '<p class="mb-3">')
+    .replace(/$/, '</p>');
+}

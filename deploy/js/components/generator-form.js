@@ -1,4 +1,5 @@
 import { REGIONS } from '../utils/data.js';
+import { mdToHTML } from '../utils/render.js';
 
 export function renderGeneratorForm(containerId, { fields = [], onGenerate, generateLabel = 'Generate', namespace = '' }) {
   const container = typeof containerId === 'string' ? document.querySelector(containerId) : containerId;
@@ -66,21 +67,6 @@ export function renderGeneratorForm(containerId, { fields = [], onGenerate, gene
       onGenerate(values);
     });
   }
-}
-
-function mdToHTML(md) {
-  return md
-    .replace(/^### (.+)$/gm, '<h3 class="text-sm font-semibold text-gray-900 dark:text-gray-100 mt-4 mb-1">$1</h3>')
-    .replace(/^## (.+)$/gm, '<h2 class="text-base font-semibold text-gray-900 dark:text-gray-100 mt-5 mb-2">$1</h2>')
-    .replace(/^---$/gm, '<hr class="my-4 border-gray-200 dark:border-gray-700">')
-    .replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold text-gray-900 dark:text-gray-100">$1</strong>')
-    .replace(/\*(.+?)\*/g, '<em>$1</em>')
-    .replace(/^- (.+)$/gm, '<li class="ml-4 list-disc">$1</li>')
-    .replace(/^(\d+)\. (.+)$/gm, '<li class="ml-4 list-decimal">$2</li>')
-    .replace(/\n{2,}/g, '</p><p class="mb-3">')
-    .replace(/\n/g, '<br>')
-    .replace(/^/, '<p class="mb-3">')
-    .replace(/$/, '</p>');
 }
 
 export function renderPreview(containerId, content, { loading = false } = {}) {

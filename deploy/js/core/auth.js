@@ -62,3 +62,9 @@ export function clearAuthCache() {
   cachedUser = null;
   sessionStorage.removeItem(CACHE_KEY);
 }
+
+const ADMINS = ['rick.wichgers@shopify.com', 'tadib.muqtada@shopify.com'];
+
+export function isAdmin() {
+  return ADMINS.includes(getUserEmail());
+}

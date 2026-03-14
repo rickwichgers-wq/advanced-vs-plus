@@ -1,5 +1,5 @@
 import { initApp, refreshIcons, showToast } from '../core/app.js';
-import { renderInto } from '../utils/render.js';
+import { renderInto, mdToHTML } from '../utils/render.js';
 import { renderGeneratorForm, renderPreview } from '../components/generator-form.js';
 import { OUTCOME_MAP, VERTICAL_PROFILES, GMV_RANGES, REGIONS } from '../utils/data.js';
 import {
@@ -318,21 +318,6 @@ async function runRepPrep() {
   btn.disabled = false;
   btn.innerHTML = '<i data-lucide="sparkles" class="w-4 h-4"></i> Generate Prep';
   refreshIcons();
-}
-
-function mdToHTML(md) {
-  return md
-    .replace(/^### (.+)$/gm, '<h3 class="text-sm font-semibold text-gray-900 dark:text-gray-100 mt-4 mb-1">$1</h3>')
-    .replace(/^## (.+)$/gm, '<h2 class="text-base font-semibold text-gray-900 dark:text-gray-100 mt-5 mb-2">$1</h2>')
-    .replace(/^---$/gm, '<hr class="my-4 border-gray-200 dark:border-gray-700">')
-    .replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold text-gray-900 dark:text-gray-100">$1</strong>')
-    .replace(/\*(.+?)\*/g, '<em>$1</em>')
-    .replace(/^- (.+)$/gm, '<li class="ml-4 list-disc">$1</li>')
-    .replace(/^(\d+)\. (.+)$/gm, '<li class="ml-4 list-decimal">$2</li>')
-    .replace(/\n{2,}/g, '</p><p class="mb-3">')
-    .replace(/\n/g, '<br>')
-    .replace(/^/, '<p class="mb-3">')
-    .replace(/$/, '</p>');
 }
 
 function renderPrepResult(container, content) {
