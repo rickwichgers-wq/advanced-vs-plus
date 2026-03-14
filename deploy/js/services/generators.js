@@ -13,7 +13,10 @@ async function callAI(prompt, { system = '' } = {}) {
   messages.push({ role: 'user', content: prompt });
 
   const response = await window.quick.ai.chat(messages);
-  return response?.content || response?.message?.content || '';
+  return response?.content
+    || response?.message?.content
+    || response?.choices?.[0]?.message?.content
+    || (typeof response === 'string' ? response : '');
 }
 
 const SYSTEM_PROMPT = `You are a Shopify sales enablement assistant used by Account Executives and Solutions Consultants. You help articulate the value of Shopify Plus vs Shopify Advanced. Be professional, data-driven, and concise. Use specific numbers and capabilities where possible. Frame everything around business outcomes, not feature lists.`;
